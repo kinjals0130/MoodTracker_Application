@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">MoodTracker</string>
+    <string name="feeling">How are you feeling?</string>
+    <string name="newEntry">New Entry</string>
+    <string name="priv">Private Entry?</string>
+    <string name="voiceAdd">Add a voice note</string>
+    <string name="delete">Delete</string>
+    <string name="discard">Discard</string>
+    <string name="save">Save</string>
+    <string name="one">1</string>
+    <string name="two">2</string>
+    <string name="three">3</string>
+    <string name="four">4</string>
+    <string name="five">5</string>
+    <string name="menu">Menu</string>
+    <string name="descWord">Descriptor Word</string>
+    <string name="datetime">DateTime</string>
+    <string name="content">Content Body</string>
+</resources>
