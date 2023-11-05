@@ -2,4 +2,14 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="ratingOne">#E93F45</color>
+    <color name="ratingTwo">#A563F1</color>
+    <color name="ratingThree">#0CA7F0</color>
+    <color name="ratingFour">#21BA91</color>
+    <color name="ratingFive">#2BE81D</color>
+    <color name="lightGrey">#6A6868</color>
+    <color name="save_button">#257DE8</color>
+
+
+
 </resources>

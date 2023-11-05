@@ -16,4 +16,7 @@
     <string name="descWord">Descriptor Word</string>
     <string name="datetime">DateTime</string>
     <string name="content">Content Body</string>
+    <string name="text_description">Description</string>
+    <string name="date">Date</string>
+    <string name="name">Name</string>
 </resources>
