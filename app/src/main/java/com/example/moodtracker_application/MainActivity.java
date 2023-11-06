@@ -19,16 +19,11 @@ public class MainActivity extends AppCompatActivity {
         btn_Menu = findViewById(R.id.btn_Menu);
 
 
-        btn_newEntry.setOnClickListener(v -> {
-            Intent newEntryIntent = new Intent(MainActivity.this, NoteActivity.class);
-            startActivity(newEntryIntent);
-        });
-
     }
 
     //this is called in the xml for the new entry button
-//    public void newEntryActivity(View view) {
-//        Intent intent = new Intent(MainActivity.this, NoteActivity.class);
-//        startActivity(intent);
-//    }
+    public void newEntryActivity(View view) {
+        Intent intent = new Intent(MainActivity.this, NoteActivity.class);
+        startActivity(intent);
+    }
 }

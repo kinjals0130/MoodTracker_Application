@@ -5,13 +5,16 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.ContextWrapper;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.media.MediaPlayer;
 import android.media.MediaRecorder;
 import android.os.Bundle;
 import android.os.Environment;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,18 +26,22 @@ public class VoiceNoteActivity extends AppCompatActivity {
     MediaRecorder mediaRecorder;
     MediaPlayer mediaPlayer;
 
+    Button btn_discard;
     TextView tv_userMessage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_voice_note);
 
         if(isMicrophonePresent()){
             getMicrophonePermission();
         }
+
+        tv_userMessage = findViewById(R.id.tv_message);
     }
 
+    @SuppressLint("SetTextI18n")
     public void btnRecordPressed(View view){
 
         try{
@@ -46,7 +53,8 @@ public class VoiceNoteActivity extends AppCompatActivity {
             mediaRecorder.prepare();
             mediaRecorder.start();
 
-            Toast.makeText(this, "Recording is started", Toast.LENGTH_SHORT).show();
+            tv_userMessage.setText("Audio is now recording.");
+
         }
         catch(Exception e){
             e.printStackTrace();
@@ -58,7 +66,7 @@ public class VoiceNoteActivity extends AppCompatActivity {
         mediaRecorder.stop();
         mediaRecorder.release();
         mediaRecorder = null;
-        Toast.makeText(this, "Recording is stopped", Toast.LENGTH_SHORT).show();
+        tv_userMessage.setText("Audio has stopped recording.");
 
     }
     public void btnPlayPressed(View view){
@@ -68,7 +76,7 @@ public class VoiceNoteActivity extends AppCompatActivity {
             mediaPlayer.setDataSource(getRecordingFilePath());
             mediaPlayer.prepare();
             mediaPlayer.start();
-            Toast.makeText(this, "Recording is playing", Toast.LENGTH_SHORT).show();
+            tv_userMessage.setText("Recording is now playing.");
         }
         catch(Exception e){
             e.printStackTrace();
@@ -93,6 +101,12 @@ public class VoiceNoteActivity extends AppCompatActivity {
         File musicDirectory = contextWrapper.getExternalFilesDir(Environment.DIRECTORY_MUSIC);
         File file = new File(musicDirectory, "testRecordingFile" + ".mp3");
         return file.getPath();
+
+    }
+
+    public void discardVoiceNote(View view){
+        Intent backPage = new Intent(VoiceNoteActivity.this, NoteActivity.class);
+        startActivity(backPage);
 
     }
 }

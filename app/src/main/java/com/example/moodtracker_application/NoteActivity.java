@@ -41,27 +41,18 @@ public class NoteActivity extends AppCompatActivity {
 
         cb_private = findViewById(R.id.cb_privateEntry);
 
-
-        btn_voiceNote.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent newVNoteIntent = new Intent(NoteActivity.this, VoiceNoteActivity.class);
-                startActivity(newVNoteIntent);
-            }
-        });
-
     }
 
     //this method is called when discord button is clicked, set in xml file
-//    public void mainActivity(View view){
-//        Intent mainPageIntent = new Intent(NoteActivity.this, MainActivity.class);
-//        startActivity(mainPageIntent);
-//
-//    }
+    public void mainActivity(View view){
+        Intent mainPageIntent = new Intent(NoteActivity.this, MainActivity.class);
+        startActivity(mainPageIntent);
+
+    }
 
     //looks for onClick on voice note button
-//    public void recordVoiceNote(View view){
-//        Intent voiceNoteIntent = new Intent(NoteActivity.this, VoiceNoteActivity.class);
-//        startActivity(voiceNoteIntent);
-//    }
+    public void recordVoiceNote(View view){
+        Intent voiceNoteIntent = new Intent(NoteActivity.this, VoiceNoteActivity.class);
+        startActivity(voiceNoteIntent);
+    }
 }
