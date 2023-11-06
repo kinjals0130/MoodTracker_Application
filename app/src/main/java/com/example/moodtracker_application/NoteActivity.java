@@ -28,6 +28,7 @@ public class NoteActivity extends AppCompatActivity {
         btn_discard = findViewById(R.id.btn_discardNote);
         btn_save = findViewById(R.id.btn_saveNote);
         btn_voiceNote = findViewById(R.id.btn_voiceNote);
+
         btn_rate1 = findViewById(R.id.btn_rate1);
         btn_rate2 = findViewById(R.id.btn_rate2);
         btn_rate3 = findViewById(R.id.btn_rate3);
@@ -41,12 +42,26 @@ public class NoteActivity extends AppCompatActivity {
         cb_private = findViewById(R.id.cb_privateEntry);
 
 
+        btn_voiceNote.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent newVNoteIntent = new Intent(NoteActivity.this, VoiceNoteActivity.class);
+                startActivity(newVNoteIntent);
+            }
+        });
+
     }
 
     //this method is called when discord button is clicked, set in xml file
-    public void mainActivity(View view){
-        Intent mainPageIntent = new Intent(NoteActivity.this, MainActivity.class);
-        startActivity(mainPageIntent);
+//    public void mainActivity(View view){
+//        Intent mainPageIntent = new Intent(NoteActivity.this, MainActivity.class);
+//        startActivity(mainPageIntent);
+//
+//    }
 
-    }
+    //looks for onClick on voice note button
+//    public void recordVoiceNote(View view){
+//        Intent voiceNoteIntent = new Intent(NoteActivity.this, VoiceNoteActivity.class);
+//        startActivity(voiceNoteIntent);
+//    }
 }

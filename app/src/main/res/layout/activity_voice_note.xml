@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="20dp"
+    tools:context=".VoiceNoteActivity">
+
+    <TextView
+        android:id="@+id/tv_Title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/ratingTwo"
+        android:fontFamily="sans-serif-medium"
+        android:text="@string/new_voice_note"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="40sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="136dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_Title" />
+
+    <Button
+        android:id="@+id/btn_record"
+        android:layout_width="90dp"
+        android:layout_height="90sp"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="119dp"
+        android:background="@drawable/microphone_icon"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_message"
+        android:onClick="btnRecordPressed" />
+
+    <Button
+        android:id="@+id/btn_stop"
+        android:layout_width="90dp"
+        android:layout_height="90dp"
+        android:background="@drawable/stop_recording"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/btn_record"
+        app:layout_constraintTop_toTopOf="@+id/btn_record"
+        android:onClick="btnStopPressed" />
+
+    <Button
+        android:id="@+id/btn_play"
+        android:layout_width="90dp"
+        android:layout_height="90dp"
+        android:background="@drawable/play_button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_record"
+        android:onClick="btnPlayPressed" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+

@@ -182,7 +182,6 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:backgroundTint="@color/lightGrey"
-        android:onClick="mainActivity"
         android:text="@string/discard"
         app:cornerRadius="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
