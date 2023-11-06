@@ -68,6 +68,7 @@
                 android:layout_height="60dp"
                 android:layout_margin="10dp"
                 android:layout_weight="1"
+                android:textColor="@color/white"
                 android:backgroundTint="@color/ratingOne"
                 android:text="@string/one"
                 android:textSize="18sp" />
@@ -79,6 +80,7 @@
                 android:layout_height="60dp"
                 android:layout_margin="10dp"
                 android:layout_weight="1"
+                android:textColor="@color/white"
                 android:backgroundTint="@color/ratingTwo"
                 android:text="@string/two"
                 android:textSize="18sp" />
@@ -90,6 +92,7 @@
                 android:layout_height="60dp"
                 android:layout_margin="10dp"
                 android:layout_weight="1"
+                android:textColor="@color/white"
                 android:backgroundTint="@color/ratingThree"
                 android:text="@string/three"
                 android:textSize="18sp" />
@@ -102,6 +105,7 @@
                 android:layout_margin="10dp"
                 android:layout_weight="1"
                 android:backgroundTint="@color/ratingFour"
+                android:textColor="@color/white"
                 android:text="@string/four"
                 android:textSize="18sp" />
 
@@ -113,31 +117,43 @@
                 android:layout_margin="10dp"
                 android:layout_weight="1"
                 android:backgroundTint="@color/ratingFive"
+                android:textColor="@color/white"
                 android:text="@string/five"
                 android:textSize="18sp" />
         </LinearLayout>
     </HorizontalScrollView>
 
+    <TextView
+        android:id="@+id/tv_moodMessage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text=""
+        android:textAlignment="center"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView" />
+
     <Button
         android:id="@+id/btn_newEntry"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:backgroundTint="@color/ratingFour"
+        android:backgroundTint="@color/black"
+        android:onClick="newEntryActivity"
         android:text="@string/newEntry"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView"
-        android:onClick="newEntryActivity"/>
+        app:layout_constraintTop_toBottomOf="@+id/tv_moodMessage" />
 
     <Button
         android:id="@+id/btn_Menu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:backgroundTint="#2196F3"
+        android:backgroundTint="@color/black"
         android:text="@string/menu"
         app:layout_constraintBottom_toBottomOf="@+id/materialToolbar"
         app:layout_constraintStart_toStartOf="parent"

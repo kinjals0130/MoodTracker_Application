@@ -185,7 +185,8 @@
         android:text="@string/save"
         app:cornerRadius="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        android:onClick="savePressed"/>
 
     <Button
         android:id="@+id/btn_discardNote"

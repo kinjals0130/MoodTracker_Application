@@ -41,6 +41,10 @@ public class NoteActivity extends AppCompatActivity {
 
     }
 
+    public void savePressed(View view){
+
+    }
+
     //this method is called when discord button is clicked, set in xml file
     public void mainActivity(View view){
         Intent mainPageIntent = new Intent(NoteActivity.this, MainActivity.class);
