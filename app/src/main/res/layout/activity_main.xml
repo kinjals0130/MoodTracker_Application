@@ -10,14 +10,15 @@
         android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="200dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="220dp"
         android:text="@string/feeling"
         android:textAlignment="center"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.342" />
 
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/materialToolbar"
@@ -33,20 +34,22 @@
     <ImageView
         android:id="@+id/imageView2"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="250dp"
         android:background="@drawable/sunset_background"
+        android:contentDescription="@string/sunset_background_image"
         app:layout_constraintBottom_toTopOf="@+id/textView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/materialToolbar" />
+        app:layout_constraintTop_toBottomOf="@+id/materialToolbar"
+        app:layout_constraintVertical_bias="0.0" />
 
     <HorizontalScrollView
         android:id="@+id/horizontalScrollView"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="14dp"
         android:layout_marginEnd="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -60,53 +63,58 @@
 
             <Button
                 android:id="@+id/btn_one"
+                style="?android:attr/buttonBarButtonStyle"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:layout_margin="10dp"
                 android:layout_weight="1"
                 android:backgroundTint="@color/ratingOne"
-                android:textSize="18sp"
-                android:text="@string/one" />
+                android:text="@string/one"
+                android:textSize="18sp" />
 
             <Button
                 android:id="@+id/btn_two"
+                style="?android:attr/buttonBarButtonStyle"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:layout_margin="10dp"
                 android:layout_weight="1"
-                android:textSize="18sp"
                 android:backgroundTint="@color/ratingTwo"
-                android:text="@string/two" />
+                android:text="@string/two"
+                android:textSize="18sp" />
 
             <Button
                 android:id="@+id/btn_three"
+                style="?android:attr/buttonBarButtonStyle"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:layout_margin="10dp"
                 android:layout_weight="1"
-                android:textSize="18sp"
                 android:backgroundTint="@color/ratingThree"
-                android:text="@string/three" />
+                android:text="@string/three"
+                android:textSize="18sp" />
 
             <Button
                 android:id="@+id/btn_four"
+                style="?android:attr/buttonBarButtonStyle"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:layout_margin="10dp"
                 android:layout_weight="1"
-                android:textSize="18sp"
                 android:backgroundTint="@color/ratingFour"
-                android:text="@string/four" />
+                android:text="@string/four"
+                android:textSize="18sp" />
 
             <Button
                 android:id="@+id/btn_five"
+                style="?android:attr/buttonBarButtonStyle"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:layout_margin="10dp"
                 android:layout_weight="1"
-                android:textSize="18sp"
                 android:backgroundTint="@color/ratingFive"
-                android:text="@string/five" />
+                android:text="@string/five"
+                android:textSize="18sp" />
         </LinearLayout>
     </HorizontalScrollView>
 
@@ -125,7 +133,7 @@
         app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView" />
 
     <Button
-        android:id="@+id/button7"
+        android:id="@+id/btn_Menu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
@@ -134,5 +142,18 @@
         app:layout_constraintBottom_toBottomOf="@+id/materialToolbar"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/materialToolbar" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/app_title"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toBottomOf="@+id/materialToolbar"
+        app:layout_constraintEnd_toEndOf="@+id/materialToolbar"
+        app:layout_constraintStart_toEndOf="@+id/btn_Menu"
+        app:layout_constraintTop_toTopOf="@+id/materialToolbar"
+        app:layout_constraintVertical_bias="0.355" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

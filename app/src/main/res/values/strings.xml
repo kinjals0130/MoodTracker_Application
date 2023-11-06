@@ -19,4 +19,6 @@
     <string name="text_description">Description</string>
     <string name="date">Date</string>
     <string name="name">Name</string>
+    <string name="app_title">Title</string>
+    <string name="sunset_background_image">Sunset Background Image</string>
 </resources>
