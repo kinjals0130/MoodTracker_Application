@@ -49,53 +49,63 @@
 
             <Button
                 android:id="@+id/btn_rate1"
+                style="?android:attr/buttonBarButtonStyle"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:layout_margin="10dp"
-                android:backgroundTint="@color/ratingOne"
-                android:textSize="18sp"
                 android:layout_weight="1"
-                android:text="@string/one" />
+                android:backgroundTint="@color/ratingOne"
+                android:text="@string/one"
+                android:textColor="@color/white"
+                android:textSize="18sp" />
 
             <Button
                 android:id="@+id/btn_rate2"
+                style="?android:attr/buttonBarButtonStyle"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:layout_margin="10dp"
                 android:layout_weight="1"
-                android:textSize="18sp"
                 android:backgroundTint="@color/ratingTwo"
-                android:text="@string/two" />
+                android:text="@string/two"
+                android:textColor="@color/white"
+                android:textSize="18sp" />
 
             <Button
                 android:id="@+id/btn_rate3"
+                style="?android:attr/buttonBarButtonStyle"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:layout_margin="10dp"
                 android:layout_weight="1"
-                android:textSize="18sp"
                 android:backgroundTint="@color/ratingThree"
-                android:text="@string/three" />
+                android:text="@string/three"
+                android:textColor="@color/white"
+                android:textSize="18sp" />
 
             <Button
                 android:id="@+id/btn_rate4"
+                style="?android:attr/buttonBarButtonStyle"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:layout_margin="10dp"
                 android:layout_weight="1"
-                android:textSize="18sp"
                 android:backgroundTint="@color/ratingFour"
-                android:text="@string/four" />
+                android:text="@string/four"
+                android:textColor="@color/white"
+                android:textSize="18sp" />
 
             <Button
                 android:id="@+id/btn_rate5"
+                style="?android:attr/buttonBarButtonStyle"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:layout_margin="10dp"
                 android:layout_weight="1"
-                android:textSize="18sp"
                 android:backgroundTint="@color/ratingFive"
-                android:text="@string/five" />
+                android:text="@string/five"
+                android:textColor="@color/white"
+                android:textSize="18sp" />
         </LinearLayout>
     </HorizontalScrollView>
 

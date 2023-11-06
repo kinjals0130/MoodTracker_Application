@@ -40,7 +40,7 @@
         android:background="@drawable/microphone_icon"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_message"
-        android:onClick="btnRecordPressed" />
+        android:onClick="btnPressRecord" />
 
     <Button
         android:id="@+id/btn_stop"
@@ -50,7 +50,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/btn_record"
         app:layout_constraintTop_toTopOf="@+id/btn_record"
-        android:onClick="btnStopPressed" />
+        android:onClick="btnPressStop" />
 
     <Button
         android:id="@+id/btn_play"
@@ -58,7 +58,7 @@
         android:layout_height="90dp"
         android:layout_marginTop="68dp"
         android:background="@drawable/play_button"
-        android:onClick="btnPlayPressed"
+        android:onClick="btnPressPlay"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"

@@ -14,9 +14,7 @@ import android.media.MediaRecorder;
 import android.os.Bundle;
 import android.os.Environment;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.io.File;
 
@@ -25,8 +23,6 @@ public class VoiceNoteActivity extends AppCompatActivity {
     private static int MICROPHONE_PERMISSION_CODE = 200;
     MediaRecorder mediaRecorder;
     MediaPlayer mediaPlayer;
-
-    Button btn_discard;
     TextView tv_userMessage;
 
     @Override
@@ -34,7 +30,7 @@ public class VoiceNoteActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_voice_note);
 
-        if(isMicrophonePresent()){
+        if(checkMicrophonePresent()){
             getMicrophonePermission();
         }
 
@@ -42,7 +38,7 @@ public class VoiceNoteActivity extends AppCompatActivity {
     }
 
     @SuppressLint("SetTextI18n")
-    public void btnRecordPressed(View view){
+    public void btnPressRecord(View view){
 
         try{
             mediaRecorder = new MediaRecorder();
@@ -61,7 +57,7 @@ public class VoiceNoteActivity extends AppCompatActivity {
         }
 
     }
-    public void btnStopPressed(View view){
+    public void btnPressStop(View view){
 
         mediaRecorder.stop();
         mediaRecorder.release();
@@ -69,7 +65,7 @@ public class VoiceNoteActivity extends AppCompatActivity {
         tv_userMessage.setText("Audio has stopped recording.");
 
     }
-    public void btnPlayPressed(View view){
+    public void btnPressPlay(View view){
 
         try{
             mediaPlayer = new MediaPlayer();
@@ -83,7 +79,7 @@ public class VoiceNoteActivity extends AppCompatActivity {
         }
     }
 
-    private boolean isMicrophonePresent(){
+    private boolean checkMicrophonePresent(){
         return this.getPackageManager().hasSystemFeature(PackageManager.FEATURE_MICROPHONE);
     }
 
@@ -99,7 +95,7 @@ public class VoiceNoteActivity extends AppCompatActivity {
         ContextWrapper contextWrapper = new ContextWrapper(getApplicationContext());
 
         File musicDirectory = contextWrapper.getExternalFilesDir(Environment.DIRECTORY_MUSIC);
-        File file = new File(musicDirectory, "testRecordingFile" + ".mp3");
+        File file = new File(musicDirectory, "recordingTestFile" + ".mp3");
         return file.getPath();
 
     }
