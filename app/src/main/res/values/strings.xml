@@ -23,4 +23,5 @@
     <string name="sunset_background_image">Sunset Background Image</string>
     <string name="microphone">Microphone</string>
     <string name="new_voice_note">New Voice Note</string>
+    <string name="title_of_note">Title of Note</string>
 </resources>
