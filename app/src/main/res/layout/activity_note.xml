@@ -48,64 +48,51 @@
             android:padding="10dp">
 
             <Button
-                android:id="@+id/btn_rate1"
-                style="?android:attr/buttonBarButtonStyle"
+                android:id="@+id/btn_one"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:layout_margin="10dp"
                 android:layout_weight="1"
-                android:backgroundTint="@color/ratingOne"
-                android:text="@string/one"
-                android:textColor="@color/white"
-                android:textSize="18sp" />
+                android:background="@drawable/level1frog"
+                android:foreground="@drawable/level1frog" />
 
             <Button
-                android:id="@+id/btn_rate2"
-                style="?android:attr/buttonBarButtonStyle"
+                android:id="@+id/btn_two"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:layout_margin="10dp"
                 android:layout_weight="1"
-                android:backgroundTint="@color/ratingTwo"
-                android:text="@string/two"
-                android:textColor="@color/white"
-                android:textSize="18sp" />
+                android:background="@drawable/level2frog"
+                android:foreground="@drawable/level2frog"/>
 
             <Button
-                android:id="@+id/btn_rate3"
-                style="?android:attr/buttonBarButtonStyle"
+                android:id="@+id/btn_three"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:layout_margin="10dp"
                 android:layout_weight="1"
-                android:backgroundTint="@color/ratingThree"
-                android:text="@string/three"
-                android:textColor="@color/white"
-                android:textSize="18sp" />
+                android:background="@drawable/level3frog"
+                android:foreground="@drawable/level3frog"/>
 
             <Button
-                android:id="@+id/btn_rate4"
-                style="?android:attr/buttonBarButtonStyle"
+                android:id="@+id/btn_four"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:layout_margin="10dp"
                 android:layout_weight="1"
-                android:backgroundTint="@color/ratingFour"
-                android:text="@string/four"
-                android:textColor="@color/white"
-                android:textSize="18sp" />
+                android:background="@drawable/level4frog"
+                android:foreground="@drawable/level4frog"
+                />
 
             <Button
-                android:id="@+id/btn_rate5"
-                style="?android:attr/buttonBarButtonStyle"
+                android:id="@+id/btn_five"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:layout_margin="10dp"
                 android:layout_weight="1"
-                android:backgroundTint="@color/ratingFive"
-                android:text="@string/five"
-                android:textColor="@color/white"
-                android:textSize="18sp" />
+                android:background="@drawable/level5frog"
+                android:foreground="@drawable/level5frog"/>
+
         </LinearLayout>
     </HorizontalScrollView>
 

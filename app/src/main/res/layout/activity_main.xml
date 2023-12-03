@@ -63,63 +63,50 @@
 
             <Button
                 android:id="@+id/btn_one"
-                style="?android:attr/buttonBarButtonStyle"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:layout_margin="10dp"
                 android:layout_weight="1"
-                android:textColor="@color/white"
-                android:backgroundTint="@color/ratingOne"
-                android:text="@string/one"
-                android:textSize="18sp" />
+                android:background="@drawable/level1frog"
+                android:foreground="@drawable/level1frog" />
 
             <Button
                 android:id="@+id/btn_two"
-                style="?android:attr/buttonBarButtonStyle"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:layout_margin="10dp"
                 android:layout_weight="1"
-                android:textColor="@color/white"
-                android:backgroundTint="@color/ratingTwo"
-                android:text="@string/two"
-                android:textSize="18sp" />
+                android:background="@drawable/level2frog"
+                android:foreground="@drawable/level2frog"/>
 
             <Button
                 android:id="@+id/btn_three"
-                style="?android:attr/buttonBarButtonStyle"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:layout_margin="10dp"
                 android:layout_weight="1"
-                android:textColor="@color/white"
-                android:backgroundTint="@color/ratingThree"
-                android:text="@string/three"
-                android:textSize="18sp" />
+                android:background="@drawable/level3frog"
+                android:foreground="@drawable/level3frog"/>
 
             <Button
                 android:id="@+id/btn_four"
-                style="?android:attr/buttonBarButtonStyle"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:layout_margin="10dp"
                 android:layout_weight="1"
-                android:backgroundTint="@color/ratingFour"
-                android:textColor="@color/white"
-                android:text="@string/four"
-                android:textSize="18sp" />
+                android:background="@drawable/level4frog"
+                android:foreground="@drawable/level4frog"
+            />
 
             <Button
                 android:id="@+id/btn_five"
-                style="?android:attr/buttonBarButtonStyle"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:layout_margin="10dp"
                 android:layout_weight="1"
-                android:backgroundTint="@color/ratingFive"
-                android:textColor="@color/white"
-                android:text="@string/five"
-                android:textSize="18sp" />
+                android:background="@drawable/level5frog"
+                android:foreground="@drawable/level5frog"/>
+
         </LinearLayout>
     </HorizontalScrollView>
 
@@ -171,5 +158,15 @@
         app:layout_constraintStart_toEndOf="@+id/btn_Menu"
         app:layout_constraintTop_toTopOf="@+id/materialToolbar"
         app:layout_constraintVertical_bias="0.355" />
+
+<!--    <ImageButton-->
+<!--        android:id="@+id/imageButton2"-->
+<!--        android:layout_width="60dp"-->
+<!--        android:layout_height="60dp"-->
+<!--        android:layout_weight="1"-->
+<!--        android:scaleType="fitCenter"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="@+id/btn_newEntry"-->
+<!--        app:srcCompat="@drawable/level1_frog" />-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>
