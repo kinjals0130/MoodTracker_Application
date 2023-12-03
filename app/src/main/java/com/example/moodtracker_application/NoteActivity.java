@@ -1,6 +1,7 @@
 package com.example.moodtracker_application;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,6 +16,8 @@ public class NoteActivity extends AppCompatActivity {
     Button btn_discard, btn_save, btn_rate1, btn_rate2, btn_rate3, btn_rate4, btn_rate5, btn_voiceNote;
     EditText et_date, et_description, et_Title;
     CheckBox cb_private;
+
+    ConstraintLayout entry_layout;
 
 
     @Override
@@ -38,7 +41,22 @@ public class NoteActivity extends AppCompatActivity {
 
         cb_private = findViewById(R.id.cb_privateEntry);
 
+        entry_layout = findViewById(R.id.entry_layout);
+//        setEntryBackgroundCol();
+
     }
+
+//    public void setEntryBackgroundCol(){
+//        btn_rate1.setOnClickListener(v -> entry_layout.setBackgroundResource(R.color.ratingOne));
+//
+//        btn_rate2.setOnClickListener(v -> entry_layout.setBackgroundResource(R.color.ratingTwo));
+//
+//        btn_rate3.setOnClickListener(v -> entry_layout.setBackgroundResource(R.color.ratingThree));
+//
+//        btn_rate4.setOnClickListener(v -> entry_layout.setBackgroundResource(R.color.ratingFour));
+//
+//        btn_rate5.setOnClickListener(v -> entry_layout.setBackgroundResource(R.color.ratingFive));
+//    }
 
     public void savePressed(View view){
 

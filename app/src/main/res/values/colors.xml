@@ -2,13 +2,15 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="ratingOne">#E93F45</color>
-    <color name="ratingTwo">#A563F1</color>
-    <color name="ratingThree">#0CA7F0</color>
-    <color name="ratingFour">#21BA91</color>
-    <color name="ratingFive">#2BE81D</color>
+    <color name="ratingOne">#ED6A5A</color>
+    <color name="ratingTwo">#FCB97D</color>
+    <color name="ratingThree">#9CC5A1</color>
+    <color name="ratingFour">#88AB75</color>
+    <color name="ratingFive">#49A078</color>
     <color name="lightGrey">#6A6868</color>
     <color name="save_button">#257DE8</color>
+    <color name="appBar">#96DA99</color>
+    <color name="voiceNote">#62A8E4</color>
 
 
 
