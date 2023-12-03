@@ -26,11 +26,11 @@ public class NoteActivity extends AppCompatActivity {
         btn_save = findViewById(R.id.btn_saveNote);
         btn_voiceNote = findViewById(R.id.btn_voiceNote);
 
-        btn_rate1 = findViewById(R.id.btn_rate1);
-        btn_rate2 = findViewById(R.id.btn_rate2);
-        btn_rate3 = findViewById(R.id.btn_rate3);
-        btn_rate4 = findViewById(R.id.btn_rate4);
-        btn_rate5 = findViewById(R.id.btn_rate5);
+        btn_rate1 = findViewById(R.id.btn_one);
+        btn_rate2 = findViewById(R.id.btn_two);
+        btn_rate3 = findViewById(R.id.btn_three);
+        btn_rate4 = findViewById(R.id.btn_four);
+        btn_rate5 = findViewById(R.id.btn_five);
 
         et_date = findViewById(R.id.et_date);
         et_description = findViewById(R.id.et_noteDescription);
