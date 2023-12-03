@@ -150,7 +150,7 @@
         app:layout_constraintTop_toBottomOf="@+id/et_date" />
 
     <EditText
-        android:id="@+id/et_Name"
+        android:id="@+id/et_Title"
         android:layout_width="wrap_content"
         android:layout_height="48dp"
         android:layout_marginStart="10dp"
@@ -173,7 +173,7 @@
         android:textSize="16sp"
         app:cornerRadius="0dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_Name"
+        app:layout_constraintTop_toBottomOf="@+id/et_Title"
         android:onClick="recordVoiceNote"/>
 
     <Button

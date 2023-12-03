@@ -8,13 +8,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
-
-import java.util.Date;
+import android.widget.Toast;
 
 public class NoteActivity extends AppCompatActivity {
 
     Button btn_discard, btn_save, btn_rate1, btn_rate2, btn_rate3, btn_rate4, btn_rate5, btn_voiceNote;
-    EditText et_date, et_description, et_name;
+    EditText et_date, et_description, et_Title;
     CheckBox cb_private;
 
 
@@ -35,13 +34,25 @@ public class NoteActivity extends AppCompatActivity {
 
         et_date = findViewById(R.id.et_date);
         et_description = findViewById(R.id.et_noteDescription);
-        et_name = findViewById(R.id.et_Name);
+        et_Title = findViewById(R.id.et_Title);
 
         cb_private = findViewById(R.id.cb_privateEntry);
 
     }
 
     public void savePressed(View view){
+
+        if(et_date==null){
+            Toast.makeText(this, "Please enter a date.", Toast.LENGTH_SHORT).show();
+        }
+
+        if(et_Title==null){
+            Toast.makeText(this, "Please enter a title of your nate", Toast.LENGTH_SHORT).show();
+        }
+
+        if(et_description==null){
+            Toast.makeText(this, "Please enter a description", Toast.LENGTH_SHORT).show();
+        }
 
     }
 
