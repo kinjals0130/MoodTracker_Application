@@ -15,10 +15,11 @@ import android.widget.Toast;
 public class NoteActivity extends AppCompatActivity {
 
     Button btn_discard, btn_save, btn_rate1, btn_rate2, btn_rate3, btn_rate4, btn_rate5, btn_voiceNote;
-    EditText et_date, et_description, et_Title;
+    EditText et_date, et_description, et_Title, et_Colour;
     CheckBox cb_private;
-
     LinearLayout entry_layout;
+
+    SQLiteManager sqLiteManager;
 
 
     @Override
@@ -39,40 +40,76 @@ public class NoteActivity extends AppCompatActivity {
         et_date = findViewById(R.id.et_date);
         et_description = findViewById(R.id.et_noteDescription);
         et_Title = findViewById(R.id.et_Title);
+        et_Colour = findViewById(R.id.et_colour);
 
         cb_private = findViewById(R.id.cb_privateEntry);
 
         entry_layout = findViewById(R.id.linearLayout_noteDetails);
+
+        sqLiteManager = new SQLiteManager(this);
+        //sets the background colour based on the mood clicked
         setEntryBackgroundCol();
+
+
 
     }
 
+    //sets the background colour based on the mood clicked
     public void setEntryBackgroundCol(){
-        btn_rate1.setOnClickListener(v -> entry_layout.setBackgroundResource(R.color.ratingOne));
 
-        btn_rate2.setOnClickListener(v -> entry_layout.setBackgroundResource(R.color.ratingTwo));
+        btn_rate1.setOnClickListener(v -> {
+            et_Colour.setText("#ED6A5A");
+            entry_layout.setBackgroundResource(R.color.ratingOne);
+        });
 
-        btn_rate3.setOnClickListener(v -> entry_layout.setBackgroundResource(R.color.ratingThree));
+        btn_rate2.setOnClickListener(v -> {
+            et_Colour.setText("#FCB97D");
+            entry_layout.setBackgroundResource(R.color.ratingTwo);
+        });
 
-        btn_rate4.setOnClickListener(v -> entry_layout.setBackgroundResource(R.color.ratingFour));
+        btn_rate3.setOnClickListener(v -> {
+            et_Colour.setText("#9CC5A1");
+            entry_layout.setBackgroundResource(R.color.ratingThree);
+        });
 
-        btn_rate5.setOnClickListener(v -> entry_layout.setBackgroundResource(R.color.ratingFive));
+        btn_rate4.setOnClickListener(v -> {
+            et_Colour.setText("#88AB75");
+            entry_layout.setBackgroundResource(R.color.ratingFour);
+        });
+
+        btn_rate5.setOnClickListener(v -> {
+            et_Colour.setText("#49A078");
+            entry_layout.setBackgroundResource(R.color.ratingFive);
+        });
+
+
+//        btn_rate2.setOnClickListener(v -> entry_layout.setBackgroundResource(R.color.ratingTwo));
+//
+//        btn_rate3.setOnClickListener(v -> entry_layout.setBackgroundResource(R.color.ratingThree));
+//
+//        btn_rate4.setOnClickListener(v -> entry_layout.setBackgroundResource(R.color.ratingFour));
+//
+//        btn_rate5.setOnClickListener(v -> entry_layout.setBackgroundResource(R.color.ratingFive));
     }
 
     public void savePressed(View view){
+        String title = et_Title.getText().toString();
+        String desc = et_description.getText().toString();
+        String date = et_date.getText().toString();
+        String colour = et_Colour.getText().toString();
 
-        if(et_date==null){
-            Toast.makeText(this, "Please enter a date.", Toast.LENGTH_SHORT).show();
-        }
+        if(title.isEmpty())
+            Toast.makeText(this, "Please enter a title.", Toast.LENGTH_SHORT).show();
 
-        if(et_Title==null){
-            Toast.makeText(this, "Please enter a title of your nate", Toast.LENGTH_SHORT).show();
-        }
-
-        if(et_description==null){
+        if(desc.isEmpty())
             Toast.makeText(this, "Please enter a description", Toast.LENGTH_SHORT).show();
-        }
 
+        if(date.isEmpty())
+            Toast.makeText(this, "Please enter a date", Toast.LENGTH_SHORT).show();
+
+        MyModel myModel = new MyModel(title, desc, date, colour);
+        sqLiteManager.addNewEntry(myModel);
+        Toast.makeText(this, "Entry saved successfully.", Toast.LENGTH_SHORT).show();
     }
 
     //this method is called when discord button is clicked, set in xml file
