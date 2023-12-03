@@ -32,6 +32,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/materialToolbar4" />
 
+<!--    TODO: REPLACE WITH THE SAME CODE THAT WAS MODIFIED ON MAIN ACTIVITY-->
     <HorizontalScrollView
         android:id="@+id/horizontalScrollView"
         android:layout_width="match_parent"
