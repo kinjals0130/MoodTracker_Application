@@ -30,7 +30,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/entry_datetime"
+                android:id="@+id/tv_cellDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
 
@@ -42,7 +42,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/entry_desc"
+                android:id="@+id/tv_cellTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="25dp"
@@ -50,17 +50,17 @@
                 android:text="@string/descWord"
                 android:textSize="16sp"
                 app:layout_constraintStart_toEndOf="@+id/imageView"
-                app:layout_constraintTop_toBottomOf="@+id/entry_datetime" />
+                app:layout_constraintTop_toBottomOf="@+id/tv_cellDate" />
 
             <TextView
-                android:id="@+id/entry_body"
+                android:id="@+id/tv_cellDesc"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="25dp"
                 android:layout_marginTop="20dp"
                 android:text="@string/content"
                 app:layout_constraintStart_toEndOf="@+id/imageView"
-                app:layout_constraintTop_toBottomOf="@+id/entry_desc" />
+                app:layout_constraintTop_toBottomOf="@+id/tv_cellTitle" />
 
             <TextView
                 android:id="@+id/entry_id"
@@ -78,7 +78,18 @@
                 android:text="Button"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/entry_desc"
+                app:layout_constraintStart_toEndOf="@+id/tv_cellDesc"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_cellColour"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="colour"
+                android:textColor="@color/save_button"
+                android:textSize="2sp"
+                android:visibility="invisible"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

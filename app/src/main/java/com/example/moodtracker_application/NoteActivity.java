@@ -82,14 +82,6 @@ public class NoteActivity extends AppCompatActivity {
             entry_layout.setBackgroundResource(R.color.ratingFive);
         });
 
-
-//        btn_rate2.setOnClickListener(v -> entry_layout.setBackgroundResource(R.color.ratingTwo));
-//
-//        btn_rate3.setOnClickListener(v -> entry_layout.setBackgroundResource(R.color.ratingThree));
-//
-//        btn_rate4.setOnClickListener(v -> entry_layout.setBackgroundResource(R.color.ratingFour));
-//
-//        btn_rate5.setOnClickListener(v -> entry_layout.setBackgroundResource(R.color.ratingFive));
     }
 
     public void savePressed(View view){
