@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.net.InetSocketAddress;
+
 public class MainActivity extends AppCompatActivity {
 
     Button btn_newEntry, btn_rate1, btn_rate2, btn_rate3, btn_rate4, btn_rate5, btn_Menu;
@@ -48,7 +50,13 @@ public class MainActivity extends AppCompatActivity {
         );
 
 
-
+        btn_Menu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, PastEntries_Activity.class);
+                startActivity(intent);
+            }
+        });
 
     }
 

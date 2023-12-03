@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.List;
@@ -32,6 +33,14 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull MyAdapter.ViewHolder holder, int position) {
+        MyModel myModel = getItem(position);
+
+        holder.tv_title.setText(myModel.getTitle());
+        holder.tv_description.setText(myModel.getDescription());
+        holder.tv_date.setText(myModel.getDate());
+
+        holder.tv_colour.setText(myModel.getColour());
+
 
     }
 
@@ -47,6 +56,10 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     public static class ViewHolder extends RecyclerView.ViewHolder{
         TextView tv_title, tv_description, tv_date, tv_colour;
 
+        RelativeLayout journal_layout;
+
+        MyModel myModel;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
@@ -55,6 +68,10 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
             tv_date = itemView.findViewById(R.id.tv_cellDate);
             tv_colour = itemView.findViewById(R.id.tv_cellColour);
 
+            //tv_colour.setText(myModel.getColour());
+
+//            journal_layout = itemView.findViewById(R.id.relativeLayout_journal);
+//            journal_layout.setBackgroundColor(Integer.parseInt(String.valueOf(tv_colour)));
 
         }
     }

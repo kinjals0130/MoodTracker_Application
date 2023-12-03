@@ -3,6 +3,7 @@ package com.example.moodtracker_application;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -22,6 +23,7 @@ public class NoteActivity extends AppCompatActivity {
     SQLiteManager sqLiteManager;
 
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,14 +50,7 @@ public class NoteActivity extends AppCompatActivity {
 
         sqLiteManager = new SQLiteManager(this);
         //sets the background colour based on the mood clicked
-        setEntryBackgroundCol();
-
-
-
-    }
-
-    //sets the background colour based on the mood clicked
-    public void setEntryBackgroundCol(){
+        //setEntryBackgroundCol();
 
         btn_rate1.setOnClickListener(v -> {
             et_Colour.setText("#ED6A5A");
@@ -83,6 +78,7 @@ public class NoteActivity extends AppCompatActivity {
         });
 
     }
+
 
     public void savePressed(View view){
         String title = et_Title.getText().toString();
