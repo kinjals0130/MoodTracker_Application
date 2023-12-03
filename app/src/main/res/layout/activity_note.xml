@@ -98,95 +98,153 @@
         </LinearLayout>
     </HorizontalScrollView>
 
-    <EditText
-        android:id="@+id/et_date"
-        android:layout_width="wrap_content"
-        android:layout_height="48dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="50dp"
-        android:ems="10"
-        android:hint="@string/date"
-        android:inputType="date"
-        android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView" />
-
-    <CheckBox
-        android:id="@+id/cb_privateEntry"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:layout_marginEnd="10dp"
-        android:text="@string/priv"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/et_date"
-        app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView" />
-
-    <EditText
-        android:id="@+id/et_noteDescription"
+    <LinearLayout
+        android:id="@+id/linearLayout_noteDetails"
         android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="36dp"
-        android:layout_marginEnd="10dp"
-        android:ems="10"
-        android:hint="@string/text_description"
-        android:inputType="textMultiLine"
-        android:textSize="18sp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:orientation="vertical"
+        android:padding="10dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.079"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_date" />
+        app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView">
 
-    <EditText
-        android:id="@+id/et_Title"
-        android:layout_width="wrap_content"
-        android:layout_height="48dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="100dp"
-        android:ems="10"
-        android:hint="@string/title_of_note"
-        android:inputType="text"
-        android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_noteDescription" />
+        <CheckBox
+            android:id="@+id/cb_privateEntry"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:text="@string/priv" />
+
+        <EditText
+            android:id="@+id/et_date"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:ems="10"
+            android:hint="@string/date"
+            android:inputType="date"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
+
+        <EditText
+            android:id="@+id/et_Title"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:ems="10"
+            android:hint="@string/title_of_note"
+            android:inputType="text"
+            android:textSize="18sp" />
+
+        <EditText
+            android:id="@+id/et_noteDescription"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:ems="10"
+            android:hint="@string/text_description"
+            android:inputType="textMultiLine"
+            android:textSize="18sp"
+            android:layout_marginBottom="16dp" />
+
+
+    </LinearLayout>
+<!--    <EditText-->
+<!--        android:id="@+id/et_date"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="48dp"-->
+<!--        android:layout_marginStart="10dp"-->
+<!--        android:layout_marginTop="50dp"-->
+<!--        android:ems="10"-->
+<!--        android:hint="@string/date"-->
+<!--        android:inputType="date"-->
+<!--        android:textSize="18sp"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView" />-->
+
+<!--    <CheckBox-->
+<!--        android:id="@+id/cb_privateEntry"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginTop="50dp"-->
+<!--        android:layout_marginEnd="10dp"-->
+<!--        android:text="@string/priv"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toEndOf="@+id/et_date"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView" />-->
+
+<!--    <EditText-->
+<!--        android:id="@+id/et_noteDescription"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="48dp"-->
+<!--        android:layout_marginStart="10dp"-->
+<!--        android:layout_marginTop="36dp"-->
+<!--        android:layout_marginEnd="10dp"-->
+<!--        android:ems="10"-->
+<!--        android:hint="@string/text_description"-->
+<!--        android:inputType="textMultiLine"-->
+<!--        android:textSize="18sp"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintHorizontal_bias="0.079"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/et_date" />-->
+
+<!--    <EditText-->
+<!--        android:id="@+id/et_Title"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="48dp"-->
+<!--        android:layout_marginStart="10dp"-->
+<!--        android:layout_marginTop="100dp"-->
+<!--        android:ems="10"-->
+<!--        android:hint="@string/title_of_note"-->
+<!--        android:inputType="text"-->
+<!--        android:textSize="18sp"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/et_noteDescription" />-->
 
     <Button
         android:id="@+id/btn_voiceNote"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="36dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="30dp"
         android:backgroundTint="@color/voiceNote"
         android:onClick="recordVoiceNote"
         android:text="@string/voiceAdd"
         android:textSize="16sp"
         app:cornerRadius="0dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_Title" />
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout_noteDetails" />
 
     <Button
         android:id="@+id/btn_saveNote"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="10dp"
+        android:layout_marginBottom="20dp"
         android:backgroundTint="@color/save_button"
+        android:onClick="savePressed"
         android:text="@string/save"
         app:cornerRadius="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:onClick="savePressed"/>
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <Button
         android:id="@+id/btn_discardNote"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
+        android:layout_marginBottom="20dp"
         android:backgroundTint="@color/lightGrey"
+        android:onClick="mainActivity"
         android:text="@string/discard"
         app:cornerRadius="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:onClick="mainActivity"/>
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 public class NoteActivity extends AppCompatActivity {
@@ -17,7 +18,7 @@ public class NoteActivity extends AppCompatActivity {
     EditText et_date, et_description, et_Title;
     CheckBox cb_private;
 
-    ConstraintLayout entry_layout;
+    LinearLayout entry_layout;
 
 
     @Override
@@ -41,22 +42,22 @@ public class NoteActivity extends AppCompatActivity {
 
         cb_private = findViewById(R.id.cb_privateEntry);
 
-        entry_layout = findViewById(R.id.entry_layout);
-//        setEntryBackgroundCol();
+        entry_layout = findViewById(R.id.linearLayout_noteDetails);
+        setEntryBackgroundCol();
 
     }
 
-//    public void setEntryBackgroundCol(){
-//        btn_rate1.setOnClickListener(v -> entry_layout.setBackgroundResource(R.color.ratingOne));
-//
-//        btn_rate2.setOnClickListener(v -> entry_layout.setBackgroundResource(R.color.ratingTwo));
-//
-//        btn_rate3.setOnClickListener(v -> entry_layout.setBackgroundResource(R.color.ratingThree));
-//
-//        btn_rate4.setOnClickListener(v -> entry_layout.setBackgroundResource(R.color.ratingFour));
-//
-//        btn_rate5.setOnClickListener(v -> entry_layout.setBackgroundResource(R.color.ratingFive));
-//    }
+    public void setEntryBackgroundCol(){
+        btn_rate1.setOnClickListener(v -> entry_layout.setBackgroundResource(R.color.ratingOne));
+
+        btn_rate2.setOnClickListener(v -> entry_layout.setBackgroundResource(R.color.ratingTwo));
+
+        btn_rate3.setOnClickListener(v -> entry_layout.setBackgroundResource(R.color.ratingThree));
+
+        btn_rate4.setOnClickListener(v -> entry_layout.setBackgroundResource(R.color.ratingFour));
+
+        btn_rate5.setOnClickListener(v -> entry_layout.setBackgroundResource(R.color.ratingFive));
+    }
 
     public void savePressed(View view){
 
