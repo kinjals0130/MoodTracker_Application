@@ -20,6 +20,8 @@ public class PinChangeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pin_change);
 
+        db = new SQLiteManager(this);
+
         currentPinEditText = findViewById(R.id.currentpin_et);
         newPinEditText = findViewById(R.id.newpin_et);
         saveButton = findViewById(R.id.save_btn);
@@ -41,9 +43,9 @@ public class PinChangeActivity extends AppCompatActivity {
     }
 
     private void changePin() {
+
         String currentPin = currentPinEditText.getText().toString().trim();
         String newPin = newPinEditText.getText().toString().trim();
-
 
         //determine if there is a current value in the database for a pin, if yes, set to variable
         String correctPin = db.getPin();
@@ -65,6 +67,8 @@ public class PinChangeActivity extends AppCompatActivity {
             Toast.makeText(this, "Please enter a PIN", Toast.LENGTH_SHORT).show();
         } else {
             if (correctPin.equals(currentPin)) {
+                db.addPin(newPin);
+                Toast.makeText(this, "PIN changed", Toast.LENGTH_SHORT).show();
 
             } else {
                 Toast.makeText(this, "Current PIN is incorrect.", Toast.LENGTH_SHORT).show();

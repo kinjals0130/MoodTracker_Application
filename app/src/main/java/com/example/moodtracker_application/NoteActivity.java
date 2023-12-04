@@ -193,7 +193,7 @@ public class NoteActivity extends AppCompatActivity {
         String colour = et_Colour.getText().toString();
         // TODO: ACTUALLY GET the real value for emotion
         String emotion = "placeholder text";
-        int priv = (cb_private.isActivated()) ? 1 : 0;
+        int priv = (cb_private.isChecked()) ? 1 : 0;
 
         // TODO: if any invalid flag is raised then surround that field with a Red Outline
         if (date.isEmpty()) Toast.makeText(this, "Please enter a date", Toast.LENGTH_SHORT).show();
