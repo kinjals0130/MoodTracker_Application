@@ -26,7 +26,9 @@ public class SQLiteManager extends SQLiteOpenHelper {
     private static final String COLUMN_EMOTION = "emotion";
     private static final String COLUMN_PRIVATE = "private";
     private static final String COLUMN_VOICE = "voicenote";
-    private static final int DB_VERSION = 2;
+    private static final String COLUMN_LONGITUDE = "longitude";
+    private static final String COLUMN_LATITUDE = "latitude";
+    private static final int DB_VERSION = 3;
     //second table to hold the pin
     private static final String TABLE_PIN = "UserPin";
     private static final String COLUMN_PIN_ID = "id";
@@ -52,7 +54,7 @@ public class SQLiteManager extends SQLiteOpenHelper {
 
         //notes table
         StringBuilder sql_String;
-        sql_String = new StringBuilder().append("CREATE TABLE ").append(TABLE_NAME).append("(").append(COLUMN_ID).append(" INTEGER PRIMARY KEY AUTOINCREMENT, ").append(COLUMN_TITLE).append(" TEXT, ").append(COLUMN_EMOTION).append(" TEXT, ").append(COLUMN_DESCRIPTION).append(" TEXT, ").append(COLUMN_DATE).append(" TEXT, ").append(COLUMN_PRIVATE).append(" INTEGER, ").append(COLUMN_VOICE).append(" BLOB, ").append(COLUMN_COLOUR).append(" TEXT)");
+        sql_String = new StringBuilder().append("CREATE TABLE ").append(TABLE_NAME).append("(").append(COLUMN_ID).append(" INTEGER PRIMARY KEY AUTOINCREMENT, ").append(COLUMN_TITLE).append(" TEXT, ").append(COLUMN_EMOTION).append(" TEXT, ").append(COLUMN_DESCRIPTION).append(" TEXT, ").append(COLUMN_DATE).append(" TEXT, ").append(COLUMN_PRIVATE).append(" INTEGER, ").append(COLUMN_VOICE).append(" BLOB, ").append(COLUMN_COLOUR).append(" TEXT, ").append(COLUMN_LONGITUDE).append(" DOUBLE, ").append(COLUMN_LATITUDE).append(" DOUBLE )");
 
         sq.execSQL(sql_String.toString());
 
@@ -83,6 +85,10 @@ public class SQLiteManager extends SQLiteOpenHelper {
         cv.put(COLUMN_COLOUR, myModel.getColour());
         cv.put(COLUMN_PRIVATE, myModel.getPrivate());
         //not sure how to go about handling adding voice note to the table
+
+        if (myModel.getLongitude() != 0.0) cv.put(COLUMN_LONGITUDE, myModel.getLongitude()); // if they are uninitialized
+        if (myModel.getLatitude() != 0.0) cv.put(COLUMN_LATITUDE, myModel.getLatitude()); //
+
         long result = db.insert(TABLE_NAME, null, cv);
         db.close();
         return result;
@@ -136,6 +142,8 @@ public class SQLiteManager extends SQLiteOpenHelper {
                 myModel.setPrivate(cursor.getInt(5));
                 //idk how to go about handling the voice note but that will be colIndex 6
                 myModel.setColour(cursor.getString(7));
+                myModel.setLongitude(cursor.getDouble(8));
+                myModel.setLatitude(cursor.getDouble(9));
 
                 myModelList.add(myModel);
             } while (cursor.moveToNext());

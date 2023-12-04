@@ -9,10 +9,10 @@
     android:layout_height="50dp"
 
 
-    android:orientation="horizontal"
-    android:padding="5dp"
+    android:layout_marginLeft="5dp"
     android:background="@drawable/shape"
-    >
+    android:orientation="horizontal"
+    android:padding="5dp">
 
     <TextView
         android:id="@+id/dayNumber"
