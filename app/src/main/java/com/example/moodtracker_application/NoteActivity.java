@@ -86,6 +86,9 @@ public class NoteActivity extends AppCompatActivity {
         String desc = et_description.getText().toString();
         String date = et_date.getText().toString();
         String colour = et_Colour.getText().toString();
+        // TODO: ACTUALLY GET the real value for emotion
+        String emotion = "placeholder text";
+        int priv = (cb_private.isActivated()) ? 1:0;
 
         // TODO: if any invalid flag is raised then surround that field with a Red Outline
         if (title.isEmpty())
@@ -98,13 +101,14 @@ public class NoteActivity extends AppCompatActivity {
             Toast.makeText(this, "Please enter a date", Toast.LENGTH_SHORT).show();
 
         else {
-            MyModel myModel = new MyModel(title, desc, date, colour);
+            MyModel myModel = new MyModel(date, emotion,desc, colour,priv);
 
             long result = sqLiteManager.addNewEntry(myModel);
             if(result == -1){
                 Toast.makeText(this, "Could not Save Entry",Toast.LENGTH_SHORT).show();
             }else{
             Toast.makeText(this, "Entry saved successfully.", Toast.LENGTH_SHORT).show();
+
             finish(); // Return to the activity that called this
         }}
     }
