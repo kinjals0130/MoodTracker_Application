@@ -138,6 +138,7 @@ public class SQLiteManager extends SQLiteOpenHelper {
         db.close();
         return pin;
     }
+    // TODO RETURN VOICE NOTE
     public List<MyModel> getAllEntries() {
         List<MyModel> myModelList = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
@@ -164,6 +165,35 @@ public class SQLiteManager extends SQLiteOpenHelper {
         }
         cursor.close();
         return myModelList;
+
+    }
+    public MyModel getEntryByID(String id) {
+//        List<MyModel> myModelList = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        String queryString = "SELECT * FROM " + TABLE_NAME;
+        Cursor cursor = db.query(TABLE_NAME,null," "+ COLUMN_ID+ " = ?", new String[]{id},"","","");
+//        Cursor cursor = db.rawQuery(queryString, null);
+
+        MyModel myModel = new MyModel();
+        if (cursor.moveToFirst()) {
+            do {
+                myModel.setId(cursor.getString(0));
+                myModel.setTitle(cursor.getString(1));
+                myModel.setEmotion(cursor.getString(2));
+                myModel.setDescription(cursor.getString(3));
+                myModel.setDate(cursor.getString(4));
+                myModel.setPrivate(cursor.getInt(5));
+                //idk how to go about handling the voice note but that will be colIndex 6
+                myModel.setColour(cursor.getString(7));
+                myModel.setLongitude(cursor.getDouble(8));
+                myModel.setLatitude(cursor.getDouble(9));
+
+
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        return myModel;
 
     }
 
