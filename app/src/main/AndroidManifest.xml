@@ -9,8 +9,7 @@
     <!-- Required only when requesting background location access on
       Android 10 (API level 29) and higher. -->
     <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
-    <uses-permission android:name="android.permission.INTERNET"/>
-
+    <uses-permission android:name="android.permission.INTERNET" />
 
 
     <application
@@ -27,7 +26,14 @@
             android:name=".EditNote_Activity"
             android:exported="false" />
         <activity
+            android:name=".MenuActivity"
+            android:exported="false" />
+        <activity
             android:name=".PinCheck"
+            android:exported="false" />
+
+        <activity
+            android:name=".PinChangeActivity"
             android:exported="false" />
         <activity
             android:name=".PastEntries_Activity"
@@ -50,13 +56,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-<!--        <service-->
-<!--            android:name="MyNavigationService"-->
-<!--            android:foregroundServiceType="location"  >-->
-<!--        &lt;!&ndash; Any inner elements would go here. &ndash;&gt;-->
-<!--    </service>-->
+        <!--        <service-->
+        <!--            android:name="MyNavigationService"-->
+        <!--            android:foregroundServiceType="location"  >-->
+        <!--        &lt;!&ndash; Any inner elements would go here. &ndash;&gt;-->
+        <!--    </service>-->
 
-</application>
+    </application>
 
 
 </manifest>

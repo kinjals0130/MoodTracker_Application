@@ -11,7 +11,6 @@ import android.widget.Toast;
 public class PinCheck extends AppCompatActivity {
 
     private EditText pinEditText;
-
     private SQLiteManager db;
 
     @Override
@@ -28,7 +27,7 @@ public class PinCheck extends AppCompatActivity {
 
        String correctPin = db.getPin();
 
-       if (!correctPin.isEmpty() && !correctPin.equals("")) {
+       if (!correctPin.isEmpty() && !correctPin.equals("") && !correctPin.equals(null)) {
             if (enteredPin.equals(correctPin)) {
                 //navigate to edit/view activity
             } else {

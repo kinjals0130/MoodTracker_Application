@@ -93,6 +93,20 @@ public class SQLiteManager extends SQLiteOpenHelper {
         db.close();
         return result;
     }
+    public int deletePrivateEntries() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        int rowsAffected = db.delete(TABLE_NAME, COLUMN_PRIVATE + " = ?", new String[]{"1"});
+        db.close();
+        return rowsAffected;
+    }
+
+    public int deleteEntry(String dbID) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        int rowsAffected = db.delete(TABLE_NAME, COLUMN_ID + " = ?", new String[]{dbID});
+        db.close();
+        return rowsAffected;
+    }
+
 
     public long addPin(String pin) {
         SQLiteDatabase db = this.getWritableDatabase();
@@ -152,4 +166,6 @@ public class SQLiteManager extends SQLiteOpenHelper {
         return myModelList;
 
     }
+
+
 }

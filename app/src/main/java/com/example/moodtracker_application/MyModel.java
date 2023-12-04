@@ -8,8 +8,6 @@ import java.io.Serializable;
 public class MyModel implements Serializable {
     //initialize variables
     String id, date, emotion, title, description, colour;
-
-
     double longitude, latitude;
     byte[] audio;
     int priv; //private is restricted keyword

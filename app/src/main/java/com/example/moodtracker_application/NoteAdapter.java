@@ -73,8 +73,8 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> {
         return entriesList.get(position);
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView tv_title, tv_description, tv_date, tv_colour;
+    public class ViewHolder extends RecyclerView.ViewHolder {
+        TextView tv_title, tv_description, tv_date, tv_colour, tv_dbID;
         ImageView emotionImg, deletebtn;
         ImageView mic; //if there is a voice note stored, enable the microphone object
 
@@ -83,24 +83,25 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> {
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-
             tv_title = itemView.findViewById(R.id.tv_cellTitle);
             tv_description = itemView.findViewById(R.id.tv_cellDesc);
             tv_date = itemView.findViewById(R.id.tv_cellDate);
             tv_colour = itemView.findViewById(R.id.tv_cellColour);
             deletebtn = itemView.findViewById(R.id.delete_btn);
             emotionImg = itemView.findViewById(R.id.note_emoji);
+            mic = itemView.findViewById(R.id.mic_icon);
+            tv_dbID = itemView.findViewById(R.id.entry_id);
 
             deletebtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     int position = getAdapterPosition();
                     if (position != RecyclerView.NO_POSITION) {
-                        //TODO: database deletion
-                        //update viewholder
-                        // Remove item
-                        // Notify the adapter about  removal
-                        //  call db delete
+                        String dbId = tv_dbID.getText().toString();
+                        sqLiteManager.deleteEntry(dbId); // Access sqLiteManager from the outer class
+                        entriesList.remove(position);
+                        notifyItemRemoved(position);
+                        notifyItemRangeChanged(position, entriesList.size());
                     }
                 }
             });
@@ -112,9 +113,9 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> {
                 public void onClick(View v) {
                     int position = getAdapterPosition();
                     if (position != RecyclerView.NO_POSITION) {
-                        //Context context = itemView.getContext();
-                        //Intent intent = new Intent(context, EditActivity.class);
-                        //context.startActivity(intent);
+                        Context context = itemView.getContext();
+                        Intent intent = new Intent(context, EditNote_Activity.class);
+                        context.startActivity(intent);
                     }
                 }
             });
@@ -128,6 +129,7 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> {
             tv_description.setText(myModel.getTitle());
             tv_date.setText(myModel.getDate());
             tv_colour.setText(myModel.getColour());
+            tv_dbID.setText(myModel.getId());
 
             //based on the emotion need to set the correct image
             switch (emotionSwitch.getNumber(myModel.getEmotion())) {
@@ -149,11 +151,10 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> {
         }
     }
 
-    public static class PrivateViewHolder extends NoteAdapter.ViewHolder {
-        TextView tv_title, tv_date, tv_colour;
+    public class PrivateViewHolder extends NoteAdapter.ViewHolder {
+        TextView tv_title, tv_date, tv_colour, tv_dbID;
         ImageView mic; //if there is a voice note stored, enable the microphone object
         ImageView emotionImg, deletebtn;
-
         EmotionSwitch emotionSwitch = new EmotionSwitch();
 
         public PrivateViewHolder(@NonNull View itemView) {
@@ -163,16 +164,19 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> {
             tv_colour = itemView.findViewById(R.id.tv_cellColour);
             deletebtn = itemView.findViewById(R.id.priv_delete_btn);
             emotionImg = itemView.findViewById(R.id.priv_note_emoji);
+            mic = itemView.findViewById(R.id.mic_icon);
+            tv_dbID = itemView.findViewById(R.id.entry_id);
             deletebtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     int position = getAdapterPosition();
                     if (position != RecyclerView.NO_POSITION) {
-                        //TODO: database deletion
-                        //update viewholder
-                        // Remove item
-                        // Notify the adapter about  removal
-                        // call db delete
+                        String dbId = tv_dbID.getText().toString();
+                        sqLiteManager.deleteEntry(dbId); // Access sqLiteManager from the outer class
+                        entriesList.remove(position);
+                        notifyItemRemoved(position);
+                        notifyItemRangeChanged(position, entriesList.size());
+
                     }
                 }
             });
@@ -197,6 +201,7 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> {
             tv_title.setText(myModel.getEmotion());
             tv_date.setText(myModel.getDate());
             tv_colour.setText(myModel.getColour());
+            tv_dbID.setText(myModel.getId());
 
             //based on the emotion need to set the correct image
             switch (emotionSwitch.getNumber(myModel.getEmotion())) {

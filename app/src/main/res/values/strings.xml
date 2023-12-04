@@ -29,4 +29,12 @@
     <string name="okay_message">You are feeling okay today.</string>
     <string name="good_message">You are feeling good today.</string>
     <string name="happy_message">You are feeling happy today.</string>
+    <string name="setpin">Change/Set PIN</string>
+    <string name="notehis">View Note History</string>
+    <string name="back">Back</string>
+    <string name="cont">Continue</string>
+    <string name="newpin">New Pin</string>
+    <string name="currentpin">Current Pin</string>
+    <string name="createtxt">To create a pin, enter the pin in the "new pin" box below. This will delete any existing private notes made with other pins.</string>
+    <string name="changetxt">To change your pin, enter the previous pin in the "previous pin" box, and in the "new pin" box below. This will change the pin and preserve existing private notes.</string>
 </resources>

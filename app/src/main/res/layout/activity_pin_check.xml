@@ -23,11 +23,10 @@
         android:padding="16dp">
 
 
-
         <EditText
             android:id="@+id/pinEditText"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:layout_alignParentTop="true"
             android:layout_marginTop="200dp"
             android:hint="Enter your 4-digit PIN"
