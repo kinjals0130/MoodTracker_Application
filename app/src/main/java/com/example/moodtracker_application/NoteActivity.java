@@ -114,9 +114,9 @@ public class NoteActivity extends AppCompatActivity {
     }
     //this method is called when discard button is clicked, set in xml file
     public void mainActivity(View view){
-        Intent mainPageIntent = new Intent(NoteActivity.this, MainActivity.class);
-        startActivity(mainPageIntent);
-
+//        Intent mainPageIntent = new Intent(NoteActivity.this, MainActivity.class);
+//        startActivity(mainPageIntent);
+        finish();
     }
 
     //looks for onClick on voice note button
