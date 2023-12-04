@@ -4,25 +4,33 @@ import java.io.Serializable;
 
 public class MyModel implements Serializable {
     //initialize variables
-    String id, date, title, description, colour;
+    String id, date, emotion, title, description, colour;
+    byte[] audio;
+    int priv; //private is restricted keyword
 
     public MyModel(){
 
     }
 
-    public MyModel(String date, String title, String description, String colour){
-        this.date = date;
+    // this one is used from the new note screen
+    public MyModel(String date, String emotion, String description, String colour, int p){
+        this.date = date; //required
+        this.emotion = emotion; //required
         this.title = title;
         this.description = description;
-        this.colour = colour;
+        this.colour = colour; //required
+        this.priv = p;
     }
 
-    public MyModel(String id, String date, String title, String description, String colour) {
+    //quick note entry
+    public MyModel(String id, String date, String emotion, String colour ) {
         this.id = id;
         this.date = date;
-        this.title = title;
-        this.description = description;
+        this.emotion = emotion;
+        this.title = "";
+        this.description = "";
         this.colour = colour;
+        this.priv = 0; //by default not private for quick notes
     }
 
     public String getId() {
@@ -39,6 +47,14 @@ public class MyModel implements Serializable {
 
     public void setDate(String date) {
         this.date = date;
+    }
+
+    public String getEmotion() {
+        return emotion;
+    }
+
+    public void setEmotion(String emotion) {
+        this.emotion = emotion;
     }
 
     public String getTitle() {
@@ -63,6 +79,14 @@ public class MyModel implements Serializable {
 
     public void setColour(String colour) {
         this.colour = colour;
+    }
+
+    public int getPrivate() { // boolean in db
+        return priv;
+    }
+
+    public void setPrivate(int p) {
+        this.priv = p;
     }
 
 

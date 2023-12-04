@@ -35,8 +35,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     public void onBindViewHolder(@NonNull MyAdapter.ViewHolder holder, int position) {
         MyModel myModel = getItem(position);
 
-        holder.tv_title.setText(myModel.getTitle());
-        holder.tv_description.setText(myModel.getDescription());
+        holder.tv_title.setText(myModel.getEmotion()); // this is the emotion set by the user coordinating with the button
+        holder.tv_description.setText(myModel.getTitle()); //in actuality this is the title of the note where available but i didnt feel like refactoring atm
         holder.tv_date.setText(myModel.getDate());
 
         holder.tv_colour.setText(myModel.getColour());
