@@ -5,6 +5,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,14 +18,19 @@ public class PastEntries_Activity extends AppCompatActivity {
     List<MyModel> entries_list = new ArrayList<>();
     SQLiteManager sqLiteManager;
 
+    Button btn_back;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_past_entries);
 
         rv_entries = findViewById(R.id.rv_entries);
+        btn_back = findViewById(R.id.btn_Back);
 
         sqLiteManager = new SQLiteManager(this);
+
+        btn_back.setOnClickListener(v -> getOnBackPressedDispatcher().onBackPressed());
 
     }
 
