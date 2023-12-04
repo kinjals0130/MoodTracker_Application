@@ -99,11 +99,14 @@ public class NoteActivity extends AppCompatActivity {
 
         else {
             MyModel myModel = new MyModel(title, desc, date, colour);
-            // TODO: Add check that validates entry was actually added before displaying Toast
-            sqLiteManager.addNewEntry(myModel);
+
+            long result = sqLiteManager.addNewEntry(myModel);
+            if(result == -1){
+                Toast.makeText(this, "Could not Save Entry",Toast.LENGTH_SHORT).show();
+            }else{
             Toast.makeText(this, "Entry saved successfully.", Toast.LENGTH_SHORT).show();
             finish(); // Return to the activity that called this
-        }
+        }}
     }
     //this method is called when discard button is clicked, set in xml file
     public void mainActivity(View view){
