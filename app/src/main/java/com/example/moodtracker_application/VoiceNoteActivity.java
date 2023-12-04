@@ -14,6 +14,7 @@ import android.media.MediaPlayer;
 import android.media.MediaRecorder;
 import android.os.Bundle;
 import android.os.Environment;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -103,14 +104,17 @@ public class VoiceNoteActivity extends AppCompatActivity {
     }
 
     public void discardVoiceNote(View view) {
-        Intent backPage = new Intent(VoiceNoteActivity.this, NoteActivity.class);
+//        Intent backPage = new Intent(VoiceNoteActivity.this, NoteActivity.class);
         finish();
 
     }
     public void saveVoiceNote(View view) {
 
         Intent returnIntent = new Intent();
-        returnIntent.putExtra("result", new File(getApplicationContext().getFilesDir(), "recordingTestFile" + ".mp3").toURI());
+        File file = new File(getApplicationContext().getFilesDir(), "recordingTestFile" + ".mp3");
+        Log.d("returning", String.valueOf(file.toURI()));
+        returnIntent.putExtra("filePath", file.getAbsolutePath());
+//        returnIntent.setData(file.toUri());
         setResult(Activity.RESULT_OK,returnIntent);
         finish();
 

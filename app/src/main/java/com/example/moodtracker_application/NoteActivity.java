@@ -32,9 +32,12 @@ import android.widget.Toast;
 
 import org.w3c.dom.Text;
 
+import java.io.File;
+import java.io.OutputStream;
 import java.net.URI;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Objects;
 
 public class NoteActivity extends AppCompatActivity {
 
@@ -56,8 +59,8 @@ public class NoteActivity extends AppCompatActivity {
 
     String currentEmotion = null;
 
-
-    Uri voiceRecoding;
+int RECORD_VOICE_VOTE =56;
+    File voiceRecoding;
 
       @SuppressLint("SetTextI18n")
     @Override
@@ -213,6 +216,9 @@ public class NoteActivity extends AppCompatActivity {
 
         else {
             MyModel myModel = new MyModel(date, emotion, title, desc, colour, priv,longitude,latitude);
+            if(voiceRecoding.exists() && voiceRecoding.canRead()){
+
+            }
 
             long result = sqLiteManager.addNewEntry(myModel);
             if (result == -1) {
@@ -235,17 +241,17 @@ public class NoteActivity extends AppCompatActivity {
     //looks for onClick on voice note button
     public void recordVoiceNote(View view) {
         Intent voiceNoteIntent = new Intent(NoteActivity.this, VoiceNoteActivity.class);
-        startActivityForResult(voiceNoteIntent, 56);
+        startActivityForResult(voiceNoteIntent, RECORD_VOICE_VOTE);
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 56) {
+        if (requestCode == RECORD_VOICE_VOTE) {
             // Obtain new dataset from database and update the heatmap adapter
 
-            Log.d("NOTEActiivy log", "got new voice file uri: " + data.getData().toString());
-            voiceRecoding = data.getData();
+            Log.d("NoteActivity log", "got new voice file path: " + data.getStringExtra("filePath"));
+            voiceRecoding = new File(Objects.requireNonNull(data.getStringExtra("filePath")));
         }
     }
     private Boolean isLocationPermissionGranted() {
