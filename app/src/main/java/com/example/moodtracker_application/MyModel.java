@@ -13,7 +13,7 @@ public class MyModel implements Serializable {
     }
 
     // this one is used from the new note screen
-    public MyModel(String date, String emotion, String description, String colour, int p) {
+    public MyModel(String date, String emotion, String title, String description, String colour, int p) {
         this.date = date; //required
         this.emotion = emotion; //required
         this.title = title;

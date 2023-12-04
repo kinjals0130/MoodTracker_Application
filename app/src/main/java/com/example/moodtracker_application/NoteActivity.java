@@ -91,14 +91,10 @@ public class NoteActivity extends AppCompatActivity {
         int priv = (cb_private.isActivated()) ? 1 : 0;
 
         // TODO: if any invalid flag is raised then surround that field with a Red Outline
-        if (title.isEmpty()) Toast.makeText(this, "Please enter a title.", Toast.LENGTH_SHORT).show();
-
-        else if (desc.isEmpty()) Toast.makeText(this, "Please enter a description", Toast.LENGTH_SHORT).show();
-
-        else if (date.isEmpty()) Toast.makeText(this, "Please enter a date", Toast.LENGTH_SHORT).show();
+        if (date.isEmpty()) Toast.makeText(this, "Please enter a date", Toast.LENGTH_SHORT).show();
 
         else {
-            MyModel myModel = new MyModel(date, emotion, desc, colour, priv);
+            MyModel myModel = new MyModel(date, emotion, title, desc, colour, priv);
 
             long result = sqLiteManager.addNewEntry(myModel);
             if (result == -1) {
