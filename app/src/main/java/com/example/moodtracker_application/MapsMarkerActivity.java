@@ -15,6 +15,7 @@ package com.example.moodtracker_application;
 // limitations under the License.
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -31,11 +32,17 @@ import com.google.android.gms.maps.model.MarkerOptions;
 public class MapsMarkerActivity extends AppCompatActivity
         implements OnMapReadyCallback {
 
+    double longitude;
+    double lat;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // Retrieve the content view that renders the map.
         setContentView(R.layout.activity_maps);
+
+        Intent intent = getIntent();
+        longitude = intent.getExtras().getDouble("Longitude");
+        lat = intent.getExtras().getDouble("Latitude");
 
         // Get the SupportMapFragment and request notification when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
@@ -56,10 +63,10 @@ public class MapsMarkerActivity extends AppCompatActivity
     public void onMapReady(GoogleMap googleMap) {
         // Add a marker in Sydney, Australia,
         // and move the map's camera to the same location.
-        LatLng sydney = new LatLng(-33.852, 151.211);
+        LatLng sydney = new LatLng(lat, longitude);
         googleMap.addMarker(new MarkerOptions()
                 .position(sydney)
-                .title("Marker in Sydney"));
+                .title("Note Was Taken Here"));
         googleMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
     }
 }

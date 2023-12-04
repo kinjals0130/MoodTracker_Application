@@ -39,6 +39,8 @@ public class EditNote_Activity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(EditNote_Activity.this, MapsMarkerActivity.class);
+                intent.putExtra("Longitude",myModel.getLongitude());
+                intent.putExtra("Latitude",myModel.getLatitude());
                 startActivity(intent);
             }
         });
