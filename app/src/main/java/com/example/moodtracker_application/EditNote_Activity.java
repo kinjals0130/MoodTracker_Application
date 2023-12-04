@@ -75,9 +75,6 @@ public class EditNote_Activity extends AppCompatActivity {
             entry_layout.setBackgroundColor(Color.parseColor(et_colour.getText().toString()));
         }
 
-
-
-
         // get all frogs and set OnClicks
         btn_rate1 = findViewById(R.id.btn_one);
         btn_rate2 = findViewById(R.id.btn_two);
@@ -111,9 +108,6 @@ public class EditNote_Activity extends AppCompatActivity {
             entry_layout.setBackgroundResource(R.color.ratingFive);
         });
 
-
-
-
     }
 
     //this method is called when discard button is clicked, set in xml file
@@ -126,7 +120,6 @@ public class EditNote_Activity extends AppCompatActivity {
     public void savePressed(View view) {
         String title = et_title.getText().toString();
         String desc = et_description.getText().toString();
-//        String date = et_date.getText().toString();
         String date = tv_date.getText().toString();
         String colour = et_colour.getText().toString();
         // TODO: ACTUALLY GET the real value for emotion
@@ -139,7 +132,7 @@ public class EditNote_Activity extends AppCompatActivity {
         else {
             MyModel myModel = new MyModel(date, emotion, title, desc, colour, priv,this.myModel.longitude,this.myModel.latitude);
 
-            long result = sqLiteManager.addNewEntry(myModel);
+            long result = sqLiteManager.updateEntryInDatabase(myModel);
             if (result == -1) {
                 Toast.makeText(this, "Could not Save Entry", Toast.LENGTH_SHORT).show();
             } else {
