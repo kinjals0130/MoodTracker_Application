@@ -8,12 +8,12 @@ public class MyModel implements Serializable {
     byte[] audio;
     int priv; //private is restricted keyword
 
-    public MyModel(){
+    public MyModel() {
 
     }
 
     // this one is used from the new note screen
-    public MyModel(String date, String emotion, String description, String colour, int p){
+    public MyModel(String date, String emotion, String description, String colour, int p) {
         this.date = date; //required
         this.emotion = emotion; //required
         this.title = title;
@@ -23,7 +23,7 @@ public class MyModel implements Serializable {
     }
 
     //quick note entry
-    public MyModel(String id, String date, String emotion, String colour ) {
+    public MyModel(String id, String date, String emotion, String colour) {
         this.id = id;
         this.date = date;
         this.emotion = emotion;

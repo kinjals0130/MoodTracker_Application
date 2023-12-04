@@ -88,39 +88,38 @@ public class NoteActivity extends AppCompatActivity {
         String colour = et_Colour.getText().toString();
         // TODO: ACTUALLY GET the real value for emotion
         String emotion = "placeholder text";
-        int priv = (cb_private.isActivated()) ? 1:0;
+        int priv = (cb_private.isActivated()) ? 1 : 0;
 
         // TODO: if any invalid flag is raised then surround that field with a Red Outline
-        if (title.isEmpty())
-            Toast.makeText(this, "Please enter a title.", Toast.LENGTH_SHORT).show();
+        if (title.isEmpty()) Toast.makeText(this, "Please enter a title.", Toast.LENGTH_SHORT).show();
 
-        else if (desc.isEmpty())
-            Toast.makeText(this, "Please enter a description", Toast.LENGTH_SHORT).show();
+        else if (desc.isEmpty()) Toast.makeText(this, "Please enter a description", Toast.LENGTH_SHORT).show();
 
-        else if (date.isEmpty())
-            Toast.makeText(this, "Please enter a date", Toast.LENGTH_SHORT).show();
+        else if (date.isEmpty()) Toast.makeText(this, "Please enter a date", Toast.LENGTH_SHORT).show();
 
         else {
-            MyModel myModel = new MyModel(date, emotion,desc, colour,priv);
+            MyModel myModel = new MyModel(date, emotion, desc, colour, priv);
 
             long result = sqLiteManager.addNewEntry(myModel);
-            if(result == -1){
-                Toast.makeText(this, "Could not Save Entry",Toast.LENGTH_SHORT).show();
-            }else{
-            Toast.makeText(this, "Entry saved successfully.", Toast.LENGTH_SHORT).show();
+            if (result == -1) {
+                Toast.makeText(this, "Could not Save Entry", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(this, "Entry saved successfully.", Toast.LENGTH_SHORT).show();
 
-            finish(); // Return to the activity that called this
-        }}
+                finish(); // Return to the activity that called this
+            }
+        }
     }
+
     //this method is called when discard button is clicked, set in xml file
-    public void mainActivity(View view){
+    public void mainActivity(View view) {
 //        Intent mainPageIntent = new Intent(NoteActivity.this, MainActivity.class);
 //        startActivity(mainPageIntent);
         finish();
     }
 
     //looks for onClick on voice note button
-    public void recordVoiceNote(View view){
+    public void recordVoiceNote(View view) {
         Intent voiceNoteIntent = new Intent(NoteActivity.this, VoiceNoteActivity.class);
         startActivity(voiceNoteIntent);
     }

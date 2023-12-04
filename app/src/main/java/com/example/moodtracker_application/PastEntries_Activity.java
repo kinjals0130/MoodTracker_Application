@@ -15,6 +15,7 @@ public class PastEntries_Activity extends AppCompatActivity {
     MyAdapter myAdapter;
     List<MyModel> entries_list = new ArrayList<>();
     SQLiteManager sqLiteManager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,7 +27,7 @@ public class PastEntries_Activity extends AppCompatActivity {
 
     }
 
-    private void setEntriesAdapter(){
+    private void setEntriesAdapter() {
 //        entries_list.clear();
 //        sqLiteManager = SQLiteManager.instanceOfDatabase(this);
 //        sqLiteManager.getAllEntries();
@@ -43,7 +44,7 @@ public class PastEntries_Activity extends AppCompatActivity {
     }
 
     @Override
-    protected void onResume(){
+    protected void onResume() {
         super.onResume();
         setEntriesAdapter();
     }

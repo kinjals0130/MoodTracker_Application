@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -12,6 +13,7 @@ import android.widget.TextView;
 
 import java.util.List;
 
+//TODO: Refactor this class to have a more descriptive name as we have multiple recycler views and adaptor classes in this project
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
     private final List<MyModel> entriesList;
@@ -49,11 +51,11 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         return entriesList.size();
     }
 
-    public MyModel getItem(int position){
+    public MyModel getItem(int position) {
         return entriesList.get(position);
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder{
+    public static class ViewHolder extends RecyclerView.ViewHolder {
         TextView tv_title, tv_description, tv_date, tv_colour;
 
         RelativeLayout journal_layout;

@@ -1,29 +1,22 @@
 package com.example.moodtracker_application;
 
-import androidx.activity.result.ActivityResult;
-import androidx.activity.result.ActivityResultCallback;
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.activity.result.contract.ActivityResultContracts.StartActivityForResult.Companion;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
-import android.app.Activity;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
-import android.net.Uri;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -72,6 +65,7 @@ public class MainActivity extends AppCompatActivity {
 
         TextView tv_moodMessage = findViewById(R.id.tv_moodMessage);
 
+//        TODO: Replace hardcoded text with Android String Resources
         btn_rate1.setOnClickListener(v -> tv_moodMessage.setText("You are feeling sad today."));
 
         btn_rate2.setOnClickListener(v -> tv_moodMessage.setText("You are feeling not good today."));
@@ -98,11 +92,14 @@ public class MainActivity extends AppCompatActivity {
     public void newEntryActivity(View view) {
         Intent intent = new Intent(MainActivity.this, NoteActivity.class);
 
+        //noinspection deprecation
         startActivityForResult(intent, CREATE_NOTE_RESULTCODE);
 
     }
 
 
+    //Suppressing this bc efficiency is not our priority right now and this method is the most robust
+    @SuppressLint("NotifyDataSetChanged")
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
