@@ -1,12 +1,15 @@
 package com.example.moodtracker_application;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -29,6 +32,9 @@ public class EditNote_Activity extends AppCompatActivity {
     SQLiteManager sqLiteManager;
     MyModel myModel;
     String currentEmotion = null;
+
+
+    Uri voiceRecoding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -152,7 +158,17 @@ public class EditNote_Activity extends AppCompatActivity {
     //looks for onClick on voice note button
     public void recordVoiceNote(View view) {
         Intent voiceNoteIntent = new Intent(EditNote_Activity.this, VoiceNoteActivity.class);
-        startActivity(voiceNoteIntent);
+        startActivityForResult(voiceNoteIntent, 56);
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 56) {
+            // Obtain new dataset from database and update the heatmap adapter
+
+            Log.d("NOTEActiivy log", "got new voice file uri: " + data.getData().toString());
+            voiceRecoding = data.getData();
+        }
     }
 
 

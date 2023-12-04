@@ -6,6 +6,7 @@ import androidx.core.content.ContextCompat;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.ContextWrapper;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -14,6 +15,7 @@ import android.media.MediaRecorder;
 import android.os.Bundle;
 import android.os.Environment;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import java.io.File;
@@ -24,6 +26,7 @@ public class VoiceNoteActivity extends AppCompatActivity {
     MediaRecorder mediaRecorder;
     MediaPlayer mediaPlayer;
     TextView tv_userMessage;
+    Button btn_saveVoiceNote;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +38,7 @@ public class VoiceNoteActivity extends AppCompatActivity {
         }
 
         tv_userMessage = findViewById(R.id.tv_message);
+//        btn_saveVoiceNote = (Button) findViewById(R.id.btn_saveVoiceNote);
     }
 
     @SuppressLint("SetTextI18n")
@@ -93,14 +97,23 @@ public class VoiceNoteActivity extends AppCompatActivity {
         ContextWrapper contextWrapper = new ContextWrapper(getApplicationContext());
 
         File musicDirectory = contextWrapper.getExternalFilesDir(Environment.DIRECTORY_MUSIC);
-        File file = new File(musicDirectory, "recordingTestFile" + ".mp3");
+        File file = new File(getApplicationContext().getFilesDir(), "recordingTestFile" + ".mp3");
         return file.getPath();
 
     }
 
     public void discardVoiceNote(View view) {
         Intent backPage = new Intent(VoiceNoteActivity.this, NoteActivity.class);
-        startActivity(backPage);
+        finish();
+
+    }
+    public void saveVoiceNote(View view) {
+
+        Intent returnIntent = new Intent();
+        returnIntent.putExtra("result", new File(getApplicationContext().getFilesDir(), "recordingTestFile" + ".mp3").toURI());
+        setResult(Activity.RESULT_OK,returnIntent);
+        finish();
+
 
     }
 }

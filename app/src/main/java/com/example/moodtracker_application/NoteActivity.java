@@ -1,5 +1,6 @@
 package com.example.moodtracker_application;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.ActivityCompat;
@@ -16,6 +17,7 @@ import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.util.Log;
@@ -30,6 +32,7 @@ import android.widget.Toast;
 
 import org.w3c.dom.Text;
 
+import java.net.URI;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -50,12 +53,13 @@ public class NoteActivity extends AppCompatActivity {
     double latitude;
     double longitude;
 
+
     String currentEmotion = null;
 
 
+    Uri voiceRecoding;
 
-    //TODO: Replace Date Field with Date Picker (see https://developer.android.com/develop/ui/views/components/pickers#DatePicker) for tutorial
-    @SuppressLint("SetTextI18n")
+      @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -231,10 +235,19 @@ public class NoteActivity extends AppCompatActivity {
     //looks for onClick on voice note button
     public void recordVoiceNote(View view) {
         Intent voiceNoteIntent = new Intent(NoteActivity.this, VoiceNoteActivity.class);
-        startActivity(voiceNoteIntent);
+        startActivityForResult(voiceNoteIntent, 56);
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 56) {
+            // Obtain new dataset from database and update the heatmap adapter
 
+            Log.d("NOTEActiivy log", "got new voice file uri: " + data.getData().toString());
+            voiceRecoding = data.getData();
+        }
+    }
     private Boolean isLocationPermissionGranted() {
         String[] perms = {android.Manifest.permission.ACCESS_FINE_LOCATION, android.Manifest.permission.ACCESS_COARSE_LOCATION};
         if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
