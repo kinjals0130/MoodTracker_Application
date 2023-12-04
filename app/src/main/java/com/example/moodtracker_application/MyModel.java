@@ -28,6 +28,18 @@ public class MyModel implements Serializable {
         this.latitude = latitude;
     }
 
+    public MyModel(String id, String date, String emotion, String title, String description, String colour, int p, double longitude, double latitude) {
+        this.date = date; //required
+        this.emotion = emotion; //required
+        this.title = title;
+        this.description = description;
+        this.colour = colour; //required
+        this.priv = p;
+        this.longitude = longitude;
+        this.latitude = latitude;
+        this.id = id;
+    }
+
     //quick note entry
     public MyModel(String id, String date, String emotion, String colour) {
         this.id = id;
