@@ -2,7 +2,10 @@ package com.example.moodtracker_application;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -14,6 +17,7 @@ public class EditNote_Activity extends AppCompatActivity {
 
     TextView tv_date;
     CheckBox cb_private;
+    Button btn_viewMap;
 
     LinearLayout entry_layout;
     SQLiteManager sqLiteManager;
@@ -29,6 +33,15 @@ public class EditNote_Activity extends AppCompatActivity {
         et_colour  = findViewById(R.id.et_colour);
         tv_date = findViewById(R.id.DateText);
         cb_private = findViewById(R.id.cb_privateEntry);
+
+        btn_viewMap = (Button) findViewById(R.id.btn_viewMap);
+        btn_viewMap.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(EditNote_Activity.this, MapsMarkerActivity.class);
+                startActivity(intent);
+            }
+        });
 
         entry_layout = findViewById(R.id.linearLayout_noteDetails);
 
