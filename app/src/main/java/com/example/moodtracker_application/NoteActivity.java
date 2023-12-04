@@ -24,6 +24,7 @@ public class NoteActivity extends AppCompatActivity {
     SQLiteManager sqLiteManager;
 
 
+    //TODO: Replace Date Field with Date Picker (see https://developer.android.com/develop/ui/views/components/pickers#DatePicker) for tutorial
     @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {

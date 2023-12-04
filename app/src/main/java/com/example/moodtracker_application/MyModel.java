@@ -2,6 +2,7 @@ package com.example.moodtracker_application;
 
 import java.io.Serializable;
 
+//TODO: add 2 doubles of Longitude and Latitude here and in the database
 public class MyModel implements Serializable {
     //initialize variables
     String id, date, emotion, title, description, colour;

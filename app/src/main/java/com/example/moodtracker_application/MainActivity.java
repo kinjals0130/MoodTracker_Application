@@ -4,6 +4,8 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -15,6 +17,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.content.res.AppCompatResources;
+import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -137,8 +141,14 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
             Log.d("MainActivity Log", "Binding position: " + position);
-            holder.diaryDay.setText(String.valueOf(position));
-            holder.background.setBackgroundColor(Color.RED);
+            holder.diaryDay.setText(Dataset[holder.getAdapterPosition()].date);
+
+            Drawable drawable  = AppCompatResources.getDrawable(context, R.drawable.shape);
+//            GradientDrawable backgroundDrawable =(GradientDrawable) holder.background;
+            Drawable unwrappedDrawable = AppCompatResources.getDrawable(context, R.drawable.shape);
+            Drawable wrappedDrawable = DrawableCompat.wrap(unwrappedDrawable);
+            DrawableCompat.setTint(wrappedDrawable, Color.parseColor(Dataset[holder.getAdapterPosition()].colour));
+            holder.background.setBackground( wrappedDrawable);
         }
 
         @Override
