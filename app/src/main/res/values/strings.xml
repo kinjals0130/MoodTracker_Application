@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">MoodTracker</string>
+    <string name="app_name">FroggyFeel</string>
     <string name="feeling">How are you feeling?</string>
     <string name="newEntry">New Entry</string>
     <string name="priv">Private Entry?</string>

@@ -167,7 +167,7 @@ public class EditNote_Activity extends AppCompatActivity {
         if (requestCode == 56) {
             // Obtain new dataset from database and update the heatmap adapter
 
-            Log.d("NOTEActiivy log", "got new voice file uri: " + data.getData().toString());
+            Log.d("NOTE Activity log", "got new voice file uri: " + data.getData().toString());
             voiceRecoding = data.getData();
         }
     }
