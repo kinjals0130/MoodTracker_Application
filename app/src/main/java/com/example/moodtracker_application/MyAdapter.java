@@ -1,6 +1,8 @@
 package com.example.moodtracker_application;
 
 import android.content.Context;
+import android.content.Intent;
+import android.media.Image;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -60,15 +62,6 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
                 ((PrivateViewHolder) holder).bindPrivateItem(myModel);
                 break;
         }
-
-        /*
-        holder.tv_title.setText(myModel.getEmotion()); // this is the emotion set by the user coordinating with the button
-        holder.tv_description.setText(myModel.getTitle()); //in actuality this is the title of the note where available but i didnt feel like refactoring atm
-        holder.tv_date.setText(myModel.getDate());
-
-        holder.tv_colour.setText(myModel.getColour());
-*/
-
     }
 
     @Override
@@ -82,36 +75,119 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         TextView tv_title, tv_description, tv_date, tv_colour;
+        ImageView emotionImg, deletebtn;
+        ImageView mic; //if there is a voice note stored, enable the microphone object
 
+        EmotionSwitch emotionSwitch = new EmotionSwitch();
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
+
 
             tv_title = itemView.findViewById(R.id.tv_cellTitle);
             tv_description = itemView.findViewById(R.id.tv_cellDesc);
             tv_date = itemView.findViewById(R.id.tv_cellDate);
             tv_colour = itemView.findViewById(R.id.tv_cellColour);
+            deletebtn = itemView.findViewById(R.id.delete_btn);
+            emotionImg = itemView.findViewById(R.id.note_emoji);
+
+            deletebtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int position = getAdapterPosition();
+                    if (position != RecyclerView.NO_POSITION) {
+                        //update viewholder
+                        // Remove item
+                        // Notify the adapter about  removal
+                        //  call db delete
+                    }
+                }
+            });
+
+
+            //set action for entire item (go Strait to edit activity
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int position = getAdapterPosition();
+                    if (position != RecyclerView.NO_POSITION) {
+                        //Context context = itemView.getContext();
+                        //Intent intent = new Intent(context, EditActivity.class);
+                        //context.startActivity(intent);
+                    }
+                }
+            });
 
         }
 
         public void bindNonPrivateItem(MyModel myModel) {
+
             // Bind data for non-private item layout
             tv_title.setText(myModel.getEmotion());
             tv_description.setText(myModel.getTitle());
             tv_date.setText(myModel.getDate());
             tv_colour.setText(myModel.getColour());
+
+            //based on the emotion need to set the correct image
+            switch (emotionSwitch.getNumber(myModel.getEmotion())) {
+                case 1:
+                    emotionImg.setImageResource(R.drawable.level1frog);
+                    break;
+                case 2:
+                    emotionImg.setImageResource(R.drawable.level2frog);
+                    break;
+                case 3:
+                    emotionImg.setImageResource(R.drawable.level3frog);
+                    break;
+                case 4:
+                    emotionImg.setImageResource(R.drawable.level4frog);
+                    break;
+                case 5:
+                    emotionImg.setImageResource(R.drawable.level5frog);
+            }
         }
     }
 
     public static class PrivateViewHolder extends MyAdapter.ViewHolder {
         TextView tv_title, tv_date, tv_colour;
         ImageView mic; //if there is a voice note stored, enable the microphone object
+        ImageView emotionImg, deletebtn;
+
+        EmotionSwitch emotionSwitch = new EmotionSwitch();
 
         public PrivateViewHolder(@NonNull View itemView) {
             super(itemView);
             tv_title = itemView.findViewById(R.id.tv_cellTitle);
             tv_date = itemView.findViewById(R.id.tv_cellDate);
             tv_colour = itemView.findViewById(R.id.tv_cellColour);
+            deletebtn = itemView.findViewById(R.id.priv_delete_btn);
+            emotionImg = itemView.findViewById(R.id.priv_note_emoji);
+            deletebtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int position = getAdapterPosition();
+                    if (position != RecyclerView.NO_POSITION) {
+                        //update viewholder
+                        // Remove item
+                        // Notify the adapter about  removal
+                        // call db delete
+                    }
+                }
+            });
+
+
+            //set action for entire item (launch pin verification bc private item)
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int position = getAdapterPosition();
+                    if (position != RecyclerView.NO_POSITION) {
+                        //Context context = itemView.getContext();
+                        //Intent intent = new Intent(context, EditActivity.class);
+                        //context.startActivity(intent);
+                    }
+                }
+            });
         }
 
         public void bindPrivateItem(MyModel myModel) {
@@ -120,7 +196,23 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
             tv_date.setText(myModel.getDate());
             tv_colour.setText(myModel.getColour());
 
-            //
+            //based on the emotion need to set the correct image
+            switch (emotionSwitch.getNumber(myModel.getEmotion())) {
+                case 1:
+                    emotionImg.setImageResource(R.drawable.level1frog);
+                    break;
+                case 2:
+                    emotionImg.setImageResource(R.drawable.level2frog);
+                    break;
+                case 3:
+                    emotionImg.setImageResource(R.drawable.level3frog);
+                    break;
+                case 4:
+                    emotionImg.setImageResource(R.drawable.level4frog);
+                    break;
+                case 5:
+                    emotionImg.setImageResource(R.drawable.level5frog);
+            }
         }
     }
 }

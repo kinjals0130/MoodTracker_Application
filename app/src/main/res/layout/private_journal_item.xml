@@ -19,7 +19,7 @@
             android:layout_marginBottom="15dp">
 
             <ImageView
-                android:id="@+id/imageView"
+                android:id="@+id/priv_note_emoji"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
@@ -43,6 +43,16 @@
                 app:layout_constraintVertical_bias="0.968"
                 tools:srcCompat="@tools:sample/avatars" />
 
+            <ImageView
+                android:id="@+id/priv_delete_btn"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_marginEnd="10dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/trashcanpng" />
+
             <TextView
                 android:id="@+id/tv_cellDate"
                 android:layout_width="wrap_content"
@@ -52,7 +62,7 @@
                 android:layout_marginTop="25dp"
                 android:text="@string/datetime"
                 android:textSize="18sp"
-                app:layout_constraintStart_toEndOf="@+id/imageView"
+                app:layout_constraintStart_toEndOf="@+id/priv_note_emoji"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
@@ -63,7 +73,7 @@
                 android:layout_marginTop="15dp"
                 android:text="@string/descWord"
                 android:textSize="16sp"
-                app:layout_constraintStart_toEndOf="@+id/imageView"
+                app:layout_constraintStart_toEndOf="@+id/priv_note_emoji"
                 app:layout_constraintTop_toBottomOf="@+id/tv_cellDate" />
 
             <TextView
@@ -75,14 +85,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <Button
-                android:id="@+id/button8"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Button"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+
 
             <TextView
                 android:id="@+id/tv_cellColour"
