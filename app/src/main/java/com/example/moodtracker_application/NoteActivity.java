@@ -121,9 +121,8 @@ public class NoteActivity extends AppCompatActivity {
         entry_layout = findViewById(R.id.linearLayout_noteDetails);
 
         sqLiteManager = new SQLiteManager(this);
-        //sets the background colour based on the mood clicked
-        //setEntryBackgroundCol();
 
+        //sets the background colour based on the mood clicked
         btn_rate1.setOnClickListener(v -> {
             et_Colour.setText("#ED6A5A");
             entry_layout.setBackgroundResource(R.color.ratingOne);

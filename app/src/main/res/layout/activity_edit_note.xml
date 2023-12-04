@@ -2,11 +2,9 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/entry_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".NoteActivity">
-
+    tools:context=".EditNote_Activity">
 
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/materialToolbar4"
@@ -24,7 +22,7 @@
         android:id="@+id/tv_feeling"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="12dp"
         android:text="@string/feeling"
         android:textAlignment="center"
         android:textSize="20sp"
@@ -114,19 +112,8 @@
             android:layout_marginTop="10dp"
             android:text="@string/priv" />
 
-        <!--        <EditText-->
-        <!--            android:id="@+id/et_date"-->
-        <!--            android:layout_width="wrap_content"-->
-        <!--            android:layout_height="48dp"-->
-        <!--            android:layout_marginStart="10dp"-->
-        <!--            android:layout_marginTop="10dp"-->
-        <!--            android:ems="10"-->
-        <!--            android:hint="@string/date"-->
-        <!--            android:inputType="date"-->
-        <!--            android:textColor="@color/black"-->
-        <!--            android:textSize="18sp" />-->
-        <Button
-            android:id="@+id/pickDate"
+        <EditText
+            android:id="@+id/et_date"
             android:layout_width="wrap_content"
             android:layout_height="48dp"
             android:layout_marginStart="10dp"
@@ -134,18 +121,8 @@
             android:ems="10"
             android:hint="@string/date"
             android:inputType="date"
-            android:text="Pick date"
             android:textColor="@color/black"
             android:textSize="18sp" />
-
-        <TextView
-            android:id="@+id/DateText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
-            android:textAlignment="center"
-            android:textSize="20sp" />
-
 
         <EditText
             android:id="@+id/et_Title"
@@ -164,11 +141,11 @@
             android:layout_height="48dp"
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
-            android:layout_marginBottom="16dp"
             android:ems="10"
             android:hint="@string/text_description"
             android:inputType="textMultiLine"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            android:layout_marginBottom="16dp" />
 
 
     </LinearLayout>
@@ -186,6 +163,19 @@
         app:cornerRadius="0dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout_noteDetails" />
+
+    <Button
+        android:id="@+id/btn_viewVoiceNote"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
+        android:backgroundTint="@color/voiceNote"
+        android:onClick="viewVoiceNote"
+        android:text="View Voice Note"
+        android:textSize="16sp"
+        app:cornerRadius="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/btn_voiceNote" />
 
     <Button
         android:id="@+id/btn_saveNote"
@@ -217,7 +207,7 @@
         android:id="@+id/tv_newEntryTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="New Entry"
+        android:text="Edit Entry"
         android:textColor="@color/white"
         android:textSize="30sp"
         android:textStyle="bold"
