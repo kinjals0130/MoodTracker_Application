@@ -101,7 +101,7 @@ public class NoteActivity extends AppCompatActivity {
             MyModel myModel = new MyModel(title, desc, date, colour);
             sqLiteManager.addNewEntry(myModel);
             Toast.makeText(this, "Entry saved successfully.", Toast.LENGTH_SHORT).show();
-
+            finish(); // Return to the activity that called this
         }
     }
     //this method is called when discard button is clicked, set in xml file
