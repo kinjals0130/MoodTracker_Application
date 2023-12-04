@@ -113,8 +113,10 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> {
                 public void onClick(View v) {
                     int position = getAdapterPosition();
                     if (position != RecyclerView.NO_POSITION) {
+                        String dbId = tv_dbID.getText().toString();
                         Context context = itemView.getContext();
                         Intent intent = new Intent(context, EditNote_Activity.class);
+                        intent.putExtra("dbID", dbId);
                         context.startActivity(intent);
                     }
                 }
@@ -188,8 +190,10 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> {
                 public void onClick(View v) {
                     int position = getAdapterPosition();
                     if (position != RecyclerView.NO_POSITION) {
+                        String dbId = tv_dbID.getText().toString();
                         Context context = itemView.getContext();
                         Intent intent = new Intent(context, PinCheck.class);
+                        intent.putExtra("dbID", dbId);
                         context.startActivity(intent);
                     }
                 }
