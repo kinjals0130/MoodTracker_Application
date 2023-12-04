@@ -98,7 +98,7 @@ public class SQLiteManager extends SQLiteOpenHelper {
     }
 
     //adding a new entry to the table
-    public void addNewEntry(MyModel myModel){
+    public long addNewEntry(MyModel myModel){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
 
@@ -110,8 +110,9 @@ public class SQLiteManager extends SQLiteOpenHelper {
         cv.put(COLUMN_COLOUR, myModel.getColour());
         cv.put(COLUMN_PRIVATE, myModel.getPrivate());
         //not sure how to go about handling adding voice note to the table
-        db.insert(TABLE_NAME, null, cv);
+        long result = db.insert(TABLE_NAME, null, cv);
         db.close();
+        return result;
     }
 
     public List<MyModel> getAllEntries(){
