@@ -37,7 +37,7 @@ public class NoteActivity extends AppCompatActivity {
 
     Button btn_discard, btn_save, btn_rate1, btn_rate2, btn_rate3, btn_rate4, btn_rate5, btn_voiceNote, btn_pickDate;
     EditText et_date, et_description, et_Title, et_Colour;
-    TextView tv_date;
+    TextView tv_date, emotionText;
     CheckBox cb_private;
     LinearLayout entry_layout;
 
@@ -49,6 +49,8 @@ public class NoteActivity extends AppCompatActivity {
     LocationManager locationManager;
     double latitude;
     double longitude;
+
+    String currentEmotion = null;
 
 
 
@@ -68,6 +70,7 @@ public class NoteActivity extends AppCompatActivity {
         btn_rate3 = findViewById(R.id.btn_three);
         btn_rate4 = findViewById(R.id.btn_four);
         btn_rate5 = findViewById(R.id.btn_five);
+        emotionText = findViewById(R.id.emotionText);
 
 
 //        et_date = findViewById(R.id.et_date);
@@ -126,31 +129,31 @@ public class NoteActivity extends AppCompatActivity {
         //sets the background colour based on the mood clicked
         btn_rate1.setOnClickListener(v -> {
             et_Colour.setText("#ED6A5A");
-            emotion.getNumber("1");
+            emotionText.setText( emotion.getEmotion("1"));
             entry_layout.setBackgroundResource(R.color.ratingOne);
         });
 
         btn_rate2.setOnClickListener(v -> {
             et_Colour.setText("#FCB97D");
-            emotion.getNumber("2");
+            emotionText.setText(  emotion.getEmotion("2"));
             entry_layout.setBackgroundResource(R.color.ratingTwo);
         });
 
         btn_rate3.setOnClickListener(v -> {
             et_Colour.setText("#9CC5A1");
-            emotion.getNumber("3");
+            emotionText.setText( emotion.getEmotion("3"));
             entry_layout.setBackgroundResource(R.color.ratingThree);
         });
 
         btn_rate4.setOnClickListener(v -> {
             et_Colour.setText("#88AB75");
-            emotion.getNumber("4");
+            emotionText.setText( emotion.getEmotion("4"));
             entry_layout.setBackgroundResource(R.color.ratingFour);
         });
 
         btn_rate5.setOnClickListener(v -> {
             et_Colour.setText("#49A078");
-            emotion.getNumber("5");
+            emotionText.setText( emotion.getEmotion("5"));
             entry_layout.setBackgroundResource(R.color.ratingFive);
         });
 
@@ -186,8 +189,6 @@ public class NoteActivity extends AppCompatActivity {
             Log.d("Location","Longitude: "+longitude + "  Latitude: "+latitude);
         }
 
-
-
     }
 
 
@@ -198,8 +199,10 @@ public class NoteActivity extends AppCompatActivity {
         String date = tv_date.getText().toString();
         String colour = et_Colour.getText().toString();
         // TODO: ACTUALLY GET the real value for emotion
-        String emotion = "placeholder text";
+        String emotion = emotionText.getText().toString();
+        if (emotion.isEmpty()) Toast.makeText(this, "You must set an emotion!", Toast.LENGTH_SHORT).show();
         int priv = (cb_private.isChecked()) ? 1 : 0;
+
 
         // TODO: if any invalid flag is raised then surround that field with a Red Outline
         if (date.isEmpty()) Toast.makeText(this, "Please enter a date", Toast.LENGTH_SHORT).show();

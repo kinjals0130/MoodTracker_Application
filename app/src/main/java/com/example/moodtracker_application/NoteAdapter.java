@@ -34,19 +34,22 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> {
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View view;
-        NoteAdapter.ViewHolder viewHolder = null;
 
         switch (viewType) {
             case 0:
                 view = inflater.inflate(R.layout.journal_item, parent, false);
-                viewHolder = new ViewHolder(view);
-                break;
+                return new ViewHolder(view);
             case 1:
-                view = inflater.inflate(R.layout.private_journal_item, parent, false); // Replace with your private item layout
-                viewHolder = new PrivateViewHolder(view);
-                break;
+                view = inflater.inflate(R.layout.private_journal_item, parent, false);
+                return new PrivateViewHolder(view);
+            default:
+                throw new IllegalArgumentException("Invalid view type");
         }
-        return viewHolder;
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        return entriesList.get(position).getPrivate();
     }
 
 
@@ -59,7 +62,9 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> {
                 ((ViewHolder) holder).bindNonPrivateItem(myModel);
                 break;
             case 1: //bind to private layout item
-                ((PrivateViewHolder) holder).bindPrivateItem(myModel);
+                if (holder instanceof PrivateViewHolder) {
+                    ((PrivateViewHolder) holder).bindPrivateItem(myModel);
+                }
                 break;
         }
     }
@@ -92,20 +97,22 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> {
             mic = itemView.findViewById(R.id.mic_icon);
             tv_dbID = itemView.findViewById(R.id.entry_id);
 
-            deletebtn.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    int position = getAdapterPosition();
-                    if (position != RecyclerView.NO_POSITION) {
-                        String dbId = tv_dbID.getText().toString();
-                        sqLiteManager.deleteEntry(dbId); // Access sqLiteManager from the outer class
-                        entriesList.remove(position);
-                        notifyItemRemoved(position);
-                        notifyItemRangeChanged(position, entriesList.size());
-                    }
-                }
-            });
 
+            if (deletebtn != null) {
+                deletebtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        int position = getAdapterPosition();
+                        if (position != RecyclerView.NO_POSITION) {
+                            String dbId = tv_dbID.getText().toString();
+                            sqLiteManager.deleteEntry(dbId); // Access sqLiteManager from the outer class
+                            entriesList.remove(position);
+                            notifyItemRemoved(position);
+                            notifyItemRangeChanged(position, entriesList.size());
+                        }
+                    }
+                });
+            }
 
             //set action for entire item (go Strait to edit activity
             itemView.setOnClickListener(new View.OnClickListener() {
@@ -134,7 +141,7 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> {
             tv_dbID.setText(myModel.getId());
 
             //based on the emotion need to set the correct image
-            switch (emotionSwitch.getNumber(myModel.getEmotion())) {
+            switch (emotionSwitch.reverseEmotion(myModel.getEmotion())) {
                 case 1:
                     emotionImg.setImageResource(R.drawable.level1frog);
                     break;
@@ -150,13 +157,14 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> {
                 case 5:
                     emotionImg.setImageResource(R.drawable.level5frog);
             }
+            emotionImg.setVisibility(View.VISIBLE);
         }
     }
 
     public class PrivateViewHolder extends NoteAdapter.ViewHolder {
         TextView tv_title, tv_date, tv_colour, tv_dbID;
         ImageView mic; //if there is a voice note stored, enable the microphone object
-        ImageView emotionImg, deletebtn;
+        ImageView emotionImg, priv_deletebtn;
         EmotionSwitch emotionSwitch = new EmotionSwitch();
 
         public PrivateViewHolder(@NonNull View itemView) {
@@ -164,24 +172,28 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> {
             tv_title = itemView.findViewById(R.id.tv_cellTitle);
             tv_date = itemView.findViewById(R.id.tv_cellDate);
             tv_colour = itemView.findViewById(R.id.tv_cellColour);
-            deletebtn = itemView.findViewById(R.id.priv_delete_btn);
+            priv_deletebtn = itemView.findViewById(R.id.priv_delete_btn);
             emotionImg = itemView.findViewById(R.id.priv_note_emoji);
             mic = itemView.findViewById(R.id.mic_icon);
             tv_dbID = itemView.findViewById(R.id.entry_id);
-            deletebtn.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    int position = getAdapterPosition();
-                    if (position != RecyclerView.NO_POSITION) {
-                        String dbId = tv_dbID.getText().toString();
-                        sqLiteManager.deleteEntry(dbId); // Access sqLiteManager from the outer class
-                        entriesList.remove(position);
-                        notifyItemRemoved(position);
-                        notifyItemRangeChanged(position, entriesList.size());
 
+
+            if (priv_deletebtn != null) {
+                priv_deletebtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        int position = getAdapterPosition();
+                        if (position != RecyclerView.NO_POSITION) {
+                            String dbId = tv_dbID.getText().toString();
+                            sqLiteManager.deleteEntry(dbId); // Access sqLiteManager from the outer class
+                            entriesList.remove(position);
+                            notifyItemRemoved(position);
+                            notifyItemRangeChanged(position, entriesList.size());
+
+                        }
                     }
-                }
-            });
+                });
+            }
 
 
             //set action for entire item (launch pin verification bc private item)
@@ -208,7 +220,7 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> {
             tv_dbID.setText(myModel.getId());
 
             //based on the emotion need to set the correct image
-            switch (emotionSwitch.getNumber(myModel.getEmotion())) {
+            switch (emotionSwitch.reverseEmotion(myModel.getEmotion())) {
                 case 1:
                     emotionImg.setImageResource(R.drawable.level1frog);
                     break;
@@ -224,6 +236,8 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> {
                 case 5:
                     emotionImg.setImageResource(R.drawable.level5frog);
             }
+            //emotionImg.setVisibility(View.VISIBLE);
+
         }
     }
 }

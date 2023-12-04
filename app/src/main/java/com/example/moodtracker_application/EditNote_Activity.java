@@ -19,7 +19,7 @@ public class EditNote_Activity extends AppCompatActivity {
 
     EditText et_title, et_description, et_colour;
 
-    TextView tv_date;
+    TextView tv_date, emotionText;
     CheckBox cb_private;
 
     Button btn_discard, btn_save, btn_rate1, btn_rate2, btn_rate3, btn_rate4, btn_rate5, btn_voiceNote, btn_pickDate, btn_viewMap;
@@ -28,6 +28,7 @@ public class EditNote_Activity extends AppCompatActivity {
     LinearLayout entry_layout;
     SQLiteManager sqLiteManager;
     MyModel myModel;
+    String currentEmotion = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +46,7 @@ public class EditNote_Activity extends AppCompatActivity {
         btn_save = findViewById(R.id.btn_saveNote);
 
         btn_voiceNote = findViewById(R.id.btn_voiceNote);
+        emotionText = findViewById(R.id.emotionText);
 
         // Set the map button to launch a map activity
         btn_viewMap = (Button) findViewById(R.id.btn_viewMap);
@@ -71,7 +73,7 @@ public class EditNote_Activity extends AppCompatActivity {
             et_description.setText(myModel.getDescription());
             tv_date.setText(myModel.getDate());
             et_colour.setText(myModel.getColour());
-
+            currentEmotion = myModel.getEmotion();
             entry_layout.setBackgroundColor(Color.parseColor(et_colour.getText().toString()));
         }
 
@@ -85,31 +87,31 @@ public class EditNote_Activity extends AppCompatActivity {
         //sets the background colour based on the mood clicked
         btn_rate1.setOnClickListener(v -> {
             et_colour.setText("#ED6A5A");
-            emotion.getNumber("1");
+            emotionText.setText(emotion.getEmotion("1"));
             entry_layout.setBackgroundResource(R.color.ratingOne);
         });
 
         btn_rate2.setOnClickListener(v -> {
             et_colour.setText("#FCB97D");
-            emotion.getNumber("2");
+            emotionText.setText(  emotion.getEmotion("2"));
             entry_layout.setBackgroundResource(R.color.ratingTwo);
         });
 
         btn_rate3.setOnClickListener(v -> {
             et_colour.setText("#9CC5A1");
-            emotion.getNumber("3");
+            emotionText.setText( emotion.getEmotion("3"));
             entry_layout.setBackgroundResource(R.color.ratingThree);
         });
 
         btn_rate4.setOnClickListener(v -> {
             et_colour.setText("#88AB75");
-            emotion.getNumber("4");
+            emotionText.setText( emotion.getEmotion("4"));
             entry_layout.setBackgroundResource(R.color.ratingFour);
         });
 
         btn_rate5.setOnClickListener(v -> {
             et_colour.setText("#49A078");
-            emotion.getNumber("5");
+            emotionText.setText(emotion.getEmotion("5"));
             entry_layout.setBackgroundResource(R.color.ratingFive);
         });
 
@@ -128,12 +130,11 @@ public class EditNote_Activity extends AppCompatActivity {
         String date = tv_date.getText().toString();
         String colour = et_colour.getText().toString();
         // TODO: ACTUALLY GET the real value for emotion
-        String emotion = "Set emotion value";
+        String emotion = emotionText.getText().toString();
         int priv = (cb_private.isActivated()) ? 1 : 0;
 
         // TODO: if any invalid flag is raised then surround that field with a Red Outline
         if (date.isEmpty()) Toast.makeText(this, "Please enter a date", Toast.LENGTH_SHORT).show();
-
         else {
             MyModel myModel = new MyModel(date, emotion, title, desc, colour, priv,this.myModel.longitude,this.myModel.latitude);
 

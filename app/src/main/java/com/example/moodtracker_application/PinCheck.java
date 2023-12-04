@@ -23,6 +23,9 @@ public class PinCheck extends AppCompatActivity {
         setContentView(R.layout.activity_pin_check);
 
         pinEditText = findViewById(R.id.pinEditText);
+
+        db = new SQLiteManager(this);
+
         Intent intent = getIntent();
         if (intent != null) {
             receivedValue = intent.getStringExtra("dbID");
@@ -34,9 +37,9 @@ public class PinCheck extends AppCompatActivity {
 
         String enteredPin = pinEditText.getText().toString();
 
-       String correctPin = db.getPin();
+        String correctPin = db.getPin();
 
-       if (!correctPin.isEmpty() && !correctPin.equals("") && !correctPin.equals(null)) {
+        if (!correctPin.isEmpty() && !correctPin.equals("") && !correctPin.equals(null)) {
             if (enteredPin.equals(correctPin)) {
                 //navigate to edit/view activity
                 Intent intent = new Intent(this, EditNote_Activity.class);
@@ -45,11 +48,9 @@ public class PinCheck extends AppCompatActivity {
             } else {
                 Toast.makeText(this, "Incorrect PIN. Please try again.", Toast.LENGTH_SHORT).show();
             }
-       }
-       else
-       {
-           Toast.makeText(this, "There is no pin set for private notes!", Toast.LENGTH_SHORT).show();
-       }
+        } else {
+            Toast.makeText(this, "There is no pin set for private notes!", Toast.LENGTH_SHORT).show();
+        }
     }
 
     public void onBackClicked(View view) {

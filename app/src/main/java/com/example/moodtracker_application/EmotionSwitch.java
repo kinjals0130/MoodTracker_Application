@@ -4,19 +4,31 @@ import java.util.HashMap;
 
 public class EmotionSwitch {
 
-    private HashMap<String, Integer> emoSwitch;
+    private HashMap<String, String> emoSwitch, colourSw;
+    private HashMap<String, Integer> emoSwitchReverse;
 
     public EmotionSwitch() {
         emoSwitch = new HashMap<>();
-        emoSwitch.put("very sad", 1);
-        emoSwitch.put("sad", 2);
-        emoSwitch.put("neutral", 3);
-        emoSwitch.put("happy", 4);
-        emoSwitch.put("very happy", 5);
+        emoSwitch.put("1", "very sad");
+        emoSwitch.put("2", "sad");
+        emoSwitch.put("3", "neutral");
+        emoSwitch.put("4", "happy");
+        emoSwitch.put("5", "very happy");
+
+        emoSwitchReverse = new HashMap<>();
+        emoSwitchReverse.put("very sad", 1);
+        emoSwitchReverse.put("sad", 2);
+        emoSwitchReverse.put("neutral", 3);
+        emoSwitchReverse.put("happy", 4);
+        emoSwitchReverse.put("very happy", 5);
     }
 
-    public int getNumber(String inputString) {
-        return emoSwitch.getOrDefault(inputString.toLowerCase(), -1);
+    public String getEmotion(String inputString) {
+        return emoSwitch.getOrDefault(inputString.toLowerCase(), "neutral");
+    }
+    public int reverseEmotion(String inputString)
+    {
+        return emoSwitchReverse.getOrDefault(inputString.toLowerCase(), -1);
     }
 
 }
