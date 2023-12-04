@@ -69,16 +69,15 @@ public class MainActivity extends AppCompatActivity {
 
         TextView tv_moodMessage = findViewById(R.id.tv_moodMessage);
 
-//        TODO: Replace hardcoded text with Android String Resources
-        btn_rate1.setOnClickListener(v -> tv_moodMessage.setText("You are feeling sad today."));
+btn_rate1.setOnClickListener(v -> tv_moodMessage.setText(getString(R.string.sad_message)));
 
-        btn_rate2.setOnClickListener(v -> tv_moodMessage.setText("You are feeling not good today."));
+btn_rate2.setOnClickListener(v -> tv_moodMessage.setText(getString(R.string.not_good_message)));
 
-        btn_rate3.setOnClickListener(v -> tv_moodMessage.setText("You are feeling okay today."));
+btn_rate3.setOnClickListener(v -> tv_moodMessage.setText(getString(R.string.okay_message)));
 
-        btn_rate4.setOnClickListener(v -> tv_moodMessage.setText("You are feeling good today."));
+btn_rate4.setOnClickListener(v -> tv_moodMessage.setText(getString(R.string.good_message)));
 
-        btn_rate5.setOnClickListener(v -> tv_moodMessage.setText("You are feeling happy today."));
+btn_rate5.setOnClickListener(v -> tv_moodMessage.setText(getString(R.string.happy_message)));
 
 
         btn_Menu.setOnClickListener(new View.OnClickListener() {
