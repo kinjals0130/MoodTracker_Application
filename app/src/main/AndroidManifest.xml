@@ -15,6 +15,9 @@
         android:theme="@style/Theme.MoodTracker_Application"
         tools:targetApi="31">
         <activity
+            android:name=".EditNote_Activity"
+            android:exported="false" />
+        <activity
             android:name=".PinCheck"
             android:exported="false" />
         <activity

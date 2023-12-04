@@ -4,9 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".NoteActivity"
-    android:id="@+id/entry_layout">
-
+    tools:context=".EditNote_Activity">
 
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/materialToolbar4"
@@ -24,7 +22,7 @@
         android:id="@+id/tv_feeling"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="12dp"
         android:text="@string/feeling"
         android:textAlignment="center"
         android:textSize="20sp"
@@ -167,6 +165,19 @@
         app:layout_constraintTop_toBottomOf="@+id/linearLayout_noteDetails" />
 
     <Button
+        android:id="@+id/btn_viewVoiceNote"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
+        android:backgroundTint="@color/voiceNote"
+        android:onClick="viewVoiceNote"
+        android:text="View Voice Note"
+        android:textSize="16sp"
+        app:cornerRadius="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/btn_voiceNote" />
+
+    <Button
         android:id="@+id/btn_saveNote"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -196,7 +207,7 @@
         android:id="@+id/tv_newEntryTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="New Entry"
+        android:text="Edit Entry"
         android:textColor="@color/white"
         android:textSize="30sp"
         android:textStyle="bold"
