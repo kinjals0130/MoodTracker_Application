@@ -67,6 +67,8 @@ public class MainActivity extends AppCompatActivity {
         btn_rate4 = findViewById(R.id.btn_four);
         btn_rate5 = findViewById(R.id.btn_five);
 
+
+//        TODO: REplace with DB.insert calls to the respective emotion
         TextView tv_moodMessage = findViewById(R.id.tv_moodMessage);
 
         btn_rate1.setOnClickListener(v -> tv_moodMessage.setText(getString(R.string.sad_message)));
