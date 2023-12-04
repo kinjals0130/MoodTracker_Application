@@ -24,4 +24,9 @@
     <string name="microphone">Microphone</string>
     <string name="new_voice_note">New Voice Note</string>
     <string name="title_of_note">Title of Note</string>
+    <string name="sad_message">You are feeling sad today.</string>
+    <string name="not_good_message">You are feeling not good today.</string>
+    <string name="okay_message">You are feeling okay today.</string>
+    <string name="good_message">You are feeling good today.</string>
+    <string name="happy_message">You are feeling happy today.</string>
 </resources>
