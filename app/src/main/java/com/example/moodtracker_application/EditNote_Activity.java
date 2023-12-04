@@ -24,7 +24,7 @@ public class EditNote_Activity extends AppCompatActivity {
 
     Button btn_discard, btn_save, btn_rate1, btn_rate2, btn_rate3, btn_rate4, btn_rate5, btn_voiceNote, btn_pickDate, btn_viewMap;
 
-
+    EmotionSwitch emotion = new EmotionSwitch();
     LinearLayout entry_layout;
     SQLiteManager sqLiteManager;
     MyModel myModel;
@@ -85,26 +85,31 @@ public class EditNote_Activity extends AppCompatActivity {
         //sets the background colour based on the mood clicked
         btn_rate1.setOnClickListener(v -> {
             et_colour.setText("#ED6A5A");
+            emotion.getNumber("1");
             entry_layout.setBackgroundResource(R.color.ratingOne);
         });
 
         btn_rate2.setOnClickListener(v -> {
             et_colour.setText("#FCB97D");
+            emotion.getNumber("2");
             entry_layout.setBackgroundResource(R.color.ratingTwo);
         });
 
         btn_rate3.setOnClickListener(v -> {
             et_colour.setText("#9CC5A1");
+            emotion.getNumber("3");
             entry_layout.setBackgroundResource(R.color.ratingThree);
         });
 
         btn_rate4.setOnClickListener(v -> {
             et_colour.setText("#88AB75");
+            emotion.getNumber("4");
             entry_layout.setBackgroundResource(R.color.ratingFour);
         });
 
         btn_rate5.setOnClickListener(v -> {
             et_colour.setText("#49A078");
+            emotion.getNumber("5");
             entry_layout.setBackgroundResource(R.color.ratingFive);
         });
 
@@ -123,7 +128,7 @@ public class EditNote_Activity extends AppCompatActivity {
         String date = tv_date.getText().toString();
         String colour = et_colour.getText().toString();
         // TODO: ACTUALLY GET the real value for emotion
-        String emotion = "placeholder text";
+        String emotion = "Set emotion value";
         int priv = (cb_private.isActivated()) ? 1 : 0;
 
         // TODO: if any invalid flag is raised then surround that field with a Red Outline
