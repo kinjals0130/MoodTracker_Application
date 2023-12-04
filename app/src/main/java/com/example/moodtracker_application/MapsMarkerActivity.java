@@ -17,6 +17,8 @@ package com.example.moodtracker_application;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -38,13 +40,14 @@ public class MapsMarkerActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // Retrieve the content view that renders the map.
-        setContentView(R.layout.activity_maps);
-
         Intent intent = getIntent();
         longitude = intent.getExtras().getDouble("Longitude");
         lat = intent.getExtras().getDouble("Latitude");
+        Log.d("MAPS loc", "longitude "+ longitude +" Lati "+ lat);
+        setContentView(R.layout.activity_maps);
 
-        // Get the SupportMapFragment and request notification when the map is ready to be used.
+
+                // Get the SupportMapFragment and request notification when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);

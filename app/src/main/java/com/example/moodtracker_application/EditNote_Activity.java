@@ -1,8 +1,10 @@
 package com.example.moodtracker_application;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
@@ -11,6 +13,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class EditNote_Activity extends AppCompatActivity {
 
@@ -18,7 +21,9 @@ public class EditNote_Activity extends AppCompatActivity {
 
     TextView tv_date;
     CheckBox cb_private;
-    Button btn_viewMap;
+
+    Button btn_discard, btn_save, btn_rate1, btn_rate2, btn_rate3, btn_rate4, btn_rate5, btn_voiceNote, btn_pickDate, btn_viewMap;
+
 
     LinearLayout entry_layout;
     SQLiteManager sqLiteManager;
@@ -35,6 +40,13 @@ public class EditNote_Activity extends AppCompatActivity {
         tv_date = findViewById(R.id.DateText);
         cb_private = findViewById(R.id.cb_privateEntry);
 
+        btn_discard = findViewById(R.id.btn_discardNote);
+
+        btn_save = findViewById(R.id.btn_saveNote);
+
+        btn_voiceNote = findViewById(R.id.btn_voiceNote);
+
+        // Set the map button to launch a map activity
         btn_viewMap = (Button) findViewById(R.id.btn_viewMap);
         btn_viewMap.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -48,6 +60,8 @@ public class EditNote_Activity extends AppCompatActivity {
 
         entry_layout = findViewById(R.id.linearLayout_noteDetails);
 
+
+        //get all the details of the note from database
         sqLiteManager = new SQLiteManager(this);
 
         String id = getIntent().getStringExtra("dbID");
@@ -61,5 +75,87 @@ public class EditNote_Activity extends AppCompatActivity {
             entry_layout.setBackgroundColor(Color.parseColor(et_colour.getText().toString()));
         }
 
+
+
+
+        // get all frogs and set OnClicks
+        btn_rate1 = findViewById(R.id.btn_one);
+        btn_rate2 = findViewById(R.id.btn_two);
+        btn_rate3 = findViewById(R.id.btn_three);
+        btn_rate4 = findViewById(R.id.btn_four);
+        btn_rate5 = findViewById(R.id.btn_five);
+
+        //sets the background colour based on the mood clicked
+        btn_rate1.setOnClickListener(v -> {
+            et_colour.setText("#ED6A5A");
+            entry_layout.setBackgroundResource(R.color.ratingOne);
+        });
+
+        btn_rate2.setOnClickListener(v -> {
+            et_colour.setText("#FCB97D");
+            entry_layout.setBackgroundResource(R.color.ratingTwo);
+        });
+
+        btn_rate3.setOnClickListener(v -> {
+            et_colour.setText("#9CC5A1");
+            entry_layout.setBackgroundResource(R.color.ratingThree);
+        });
+
+        btn_rate4.setOnClickListener(v -> {
+            et_colour.setText("#88AB75");
+            entry_layout.setBackgroundResource(R.color.ratingFour);
+        });
+
+        btn_rate5.setOnClickListener(v -> {
+            et_colour.setText("#49A078");
+            entry_layout.setBackgroundResource(R.color.ratingFive);
+        });
+
+
+
+
     }
+
+    //this method is called when discard button is clicked, set in xml file
+    public void mainActivity(View view) {
+//        Intent mainPageIntent = new Intent(NoteActivity.this, MainActivity.class);
+//        startActivity(mainPageIntent);
+        finish();
+    }
+
+    public void savePressed(View view) {
+        String title = et_title.getText().toString();
+        String desc = et_description.getText().toString();
+//        String date = et_date.getText().toString();
+        String date = tv_date.getText().toString();
+        String colour = et_colour.getText().toString();
+        // TODO: ACTUALLY GET the real value for emotion
+        String emotion = "placeholder text";
+        int priv = (cb_private.isActivated()) ? 1 : 0;
+
+        // TODO: if any invalid flag is raised then surround that field with a Red Outline
+        if (date.isEmpty()) Toast.makeText(this, "Please enter a date", Toast.LENGTH_SHORT).show();
+
+        else {
+            MyModel myModel = new MyModel(date, emotion, title, desc, colour, priv,this.myModel.longitude,this.myModel.latitude);
+
+            long result = sqLiteManager.addNewEntry(myModel);
+            if (result == -1) {
+                Toast.makeText(this, "Could not Save Entry", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(this, "Entry saved successfully.", Toast.LENGTH_SHORT).show();
+
+                finish(); // Return to the activity that called this
+            }
+        }
+    }
+
+    //looks for onClick on voice note button
+    public void recordVoiceNote(View view) {
+        Intent voiceNoteIntent = new Intent(EditNote_Activity.this, VoiceNoteActivity.class);
+        startActivity(voiceNoteIntent);
+    }
+
+
+
 }
