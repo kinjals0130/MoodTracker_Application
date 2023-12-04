@@ -2,11 +2,20 @@ package com.example.moodtracker_application;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.app.ActivityCompat;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.Criteria;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
+import android.provider.Settings;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -22,6 +31,12 @@ public class NoteActivity extends AppCompatActivity {
     LinearLayout entry_layout;
 
     SQLiteManager sqLiteManager;
+
+    int LOCATION_RESQUEST_CODE = 20;
+    Location currentLocation = null;
+    LocationManager locationManager;
+    double latitude;
+    double longitude;
 
 
     //TODO: Replace Date Field with Date Picker (see https://developer.android.com/develop/ui/views/components/pickers#DatePicker) for tutorial
@@ -79,6 +94,40 @@ public class NoteActivity extends AppCompatActivity {
             entry_layout.setBackgroundResource(R.color.ratingFive);
         });
 
+        // get location perermissions
+        boolean permsGranted = isLocationPermissionGranted();
+//        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        LocationManager locManager;
+        locManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+        String gpsProvider = LocationManager.GPS_PROVIDER;
+        if (!locManager.isProviderEnabled(gpsProvider)) {
+            // would be a good idea to ask them first!
+            String locConfig = Settings.ACTION_LOCATION_SOURCE_SETTINGS;
+            Intent enableGPS = new Intent(locConfig);
+            startActivity(enableGPS);
+        }
+        Criteria criteria = new Criteria();
+        criteria.setAccuracy(Criteria.ACCURACY_COARSE);
+        criteria.setPowerRequirement(Criteria.POWER_LOW);
+        criteria.setAltitudeRequired(false);
+        criteria.setBearingRequired(false);
+        criteria.setSpeedRequired(false);
+        criteria.setCostAllowed(false);
+        String recommended = locManager.getBestProvider(criteria, true);
+
+
+        if(permsGranted) {
+            //the if statement is a perms check
+            @SuppressLint("MissingPermission") Location location = locManager.getLastKnownLocation(recommended);
+            assert location != null;
+             latitude = location.getLatitude();
+             longitude = location.getLongitude();
+
+            Log.d("Location","Longitude: "+longitude + "  Latitude: "+latitude);
+        }
+
+
+
     }
 
 
@@ -95,7 +144,7 @@ public class NoteActivity extends AppCompatActivity {
         if (date.isEmpty()) Toast.makeText(this, "Please enter a date", Toast.LENGTH_SHORT).show();
 
         else {
-            MyModel myModel = new MyModel(date, emotion, title, desc, colour, priv);
+            MyModel myModel = new MyModel(date, emotion, title, desc, colour, priv,longitude,latitude);
 
             long result = sqLiteManager.addNewEntry(myModel);
             if (result == -1) {
@@ -120,4 +169,17 @@ public class NoteActivity extends AppCompatActivity {
         Intent voiceNoteIntent = new Intent(NoteActivity.this, VoiceNoteActivity.class);
         startActivity(voiceNoteIntent);
     }
+
+
+    private Boolean isLocationPermissionGranted() {
+        String[] perms = {android.Manifest.permission.ACCESS_FINE_LOCATION, android.Manifest.permission.ACCESS_COARSE_LOCATION};
+        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, perms, LOCATION_RESQUEST_CODE);
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+
 }

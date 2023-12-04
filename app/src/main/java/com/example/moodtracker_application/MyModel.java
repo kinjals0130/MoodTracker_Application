@@ -1,11 +1,16 @@
 package com.example.moodtracker_application;
 
+import android.provider.ContactsContract;
+
 import java.io.Serializable;
 
 //TODO: add 2 doubles of Longitude and Latitude here and in the database
 public class MyModel implements Serializable {
     //initialize variables
     String id, date, emotion, title, description, colour;
+
+
+    double longitude, latitude;
     byte[] audio;
     int priv; //private is restricted keyword
 
@@ -14,13 +19,15 @@ public class MyModel implements Serializable {
     }
 
     // this one is used from the new note screen
-    public MyModel(String date, String emotion, String title, String description, String colour, int p) {
+    public MyModel(String date, String emotion, String title, String description, String colour, int p, double longitude, double latitude) {
         this.date = date; //required
         this.emotion = emotion; //required
         this.title = title;
         this.description = description;
         this.colour = colour; //required
         this.priv = p;
+        this.longitude = longitude;
+        this.latitude = latitude;
     }
 
     //quick note entry
@@ -88,6 +95,22 @@ public class MyModel implements Serializable {
 
     public void setPrivate(int p) {
         this.priv = p;
+    }
+
+    public double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
+    }
+
+    public double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
     }
 
 
