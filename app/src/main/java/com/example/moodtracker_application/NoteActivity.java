@@ -99,6 +99,7 @@ public class NoteActivity extends AppCompatActivity {
 
         else {
             MyModel myModel = new MyModel(title, desc, date, colour);
+            // TODO: Add check that validates entry was actually added before displaying Toast
             sqLiteManager.addNewEntry(myModel);
             Toast.makeText(this, "Entry saved successfully.", Toast.LENGTH_SHORT).show();
             finish(); // Return to the activity that called this
