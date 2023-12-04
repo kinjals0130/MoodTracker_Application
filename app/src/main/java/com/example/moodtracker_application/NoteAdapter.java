@@ -96,6 +96,7 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> {
                 public void onClick(View v) {
                     int position = getAdapterPosition();
                     if (position != RecyclerView.NO_POSITION) {
+                        //TODO: database deletion
                         //update viewholder
                         // Remove item
                         // Notify the adapter about  removal
@@ -167,6 +168,7 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> {
                 public void onClick(View v) {
                     int position = getAdapterPosition();
                     if (position != RecyclerView.NO_POSITION) {
+                        //TODO: database deletion
                         //update viewholder
                         // Remove item
                         // Notify the adapter about  removal
@@ -182,9 +184,9 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> {
                 public void onClick(View v) {
                     int position = getAdapterPosition();
                     if (position != RecyclerView.NO_POSITION) {
-                        //Context context = itemView.getContext();
-                        //Intent intent = new Intent(context, EditActivity.class);
-                        //context.startActivity(intent);
+                        Context context = itemView.getContext();
+                        Intent intent = new Intent(context, PinCheck.class);
+                        context.startActivity(intent);
                     }
                 }
             });

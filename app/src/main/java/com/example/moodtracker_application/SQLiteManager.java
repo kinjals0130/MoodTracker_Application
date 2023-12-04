@@ -9,6 +9,8 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
 
+import java.util.Calendar;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -86,6 +88,36 @@ public class SQLiteManager extends SQLiteOpenHelper {
         return result;
     }
 
+    public long addPin(String pin) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+
+        Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String formattedDateTime = dateFormat.format(calendar.getTime());
+
+        cv.put(COLUMN_PIN_DATE, formattedDateTime);
+        cv.put(COLUMN_PIN_ENTRY, pin);
+        //not sure how to go about handling adding voice note to the table
+        long result = db.insert(TABLE_PIN, null, cv);
+        db.close();
+        return result;
+    }
+
+    public String getPin() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String pin = null;
+
+        String queryString = "SELECT " + COLUMN_PIN_ENTRY + " FROM " + TABLE_PIN + " ORDER BY " + COLUMN_PIN_DATE + " DESC LIMIT 1";
+        Cursor cursor = db.rawQuery(queryString, null);
+
+        if (cursor != null && cursor.moveToFirst()) {
+            pin = cursor.getString(0);
+            cursor.close();
+        }
+        db.close();
+        return pin;
+    }
     public List<MyModel> getAllEntries() {
         List<MyModel> myModelList = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
