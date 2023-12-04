@@ -102,7 +102,7 @@ public class SQLiteManager extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
 
-        cv.put(COLUMN_ID, myModel.getId());
+        if (myModel.getId() != null  ) cv.put(COLUMN_ID, myModel.getId()) ; //
         cv.put(COLUMN_EMOTION, myModel.getEmotion());
         cv.put(COLUMN_TITLE, myModel.getTitle());
         cv.put(COLUMN_DESCRIPTION, myModel.getDescription());
