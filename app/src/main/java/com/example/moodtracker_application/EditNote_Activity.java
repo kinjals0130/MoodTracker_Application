@@ -3,6 +3,7 @@ package com.example.moodtracker_application;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -49,14 +50,15 @@ public class EditNote_Activity extends AppCompatActivity {
 
         sqLiteManager = new SQLiteManager(this);
 
-        myModel = new MyModel();
+        String id = getIntent().getStringExtra("dbID");
+        myModel = sqLiteManager.getEntryByID(id);//new MyModel();
         if(myModel.getId() != null){
             et_title.setText(myModel.getTitle());
             et_description.setText(myModel.getDescription());
             tv_date.setText(myModel.getDate());
             et_colour.setText(myModel.getColour());
 
-            entry_layout.setBackgroundColor(Integer.parseInt(et_colour.toString()));
+            entry_layout.setBackgroundColor(Color.parseColor(et_colour.getText().toString()));
         }
 
     }
