@@ -125,6 +125,7 @@ public class EditNote_Activity extends AppCompatActivity {
     }
 
     public void savePressed(View view) {
+        String id = getIntent().getStringExtra("dbID");
         String title = et_title.getText().toString();
         String desc = et_description.getText().toString();
         String date = tv_date.getText().toString();
@@ -136,7 +137,7 @@ public class EditNote_Activity extends AppCompatActivity {
         // TODO: if any invalid flag is raised then surround that field with a Red Outline
         if (date.isEmpty()) Toast.makeText(this, "Please enter a date", Toast.LENGTH_SHORT).show();
         else {
-            MyModel myModel = new MyModel(date, emotion, title, desc, colour, priv,this.myModel.longitude,this.myModel.latitude);
+            MyModel myModel = new MyModel(id, date, emotion, title, desc, colour, priv,this.myModel.longitude,this.myModel.latitude);
 
             long result = sqLiteManager.updateEntryInDatabase(myModel);
             if (result == -1) {
