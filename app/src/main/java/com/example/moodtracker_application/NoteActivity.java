@@ -43,6 +43,7 @@ public class NoteActivity extends AppCompatActivity {
 
     SQLiteManager sqLiteManager;
 
+    EmotionSwitch emotion = new EmotionSwitch();
     int LOCATION_RESQUEST_CODE = 20;
     Location currentLocation = null;
     LocationManager locationManager;
@@ -125,26 +126,31 @@ public class NoteActivity extends AppCompatActivity {
         //sets the background colour based on the mood clicked
         btn_rate1.setOnClickListener(v -> {
             et_Colour.setText("#ED6A5A");
+            emotion.getNumber("1");
             entry_layout.setBackgroundResource(R.color.ratingOne);
         });
 
         btn_rate2.setOnClickListener(v -> {
             et_Colour.setText("#FCB97D");
+            emotion.getNumber("2");
             entry_layout.setBackgroundResource(R.color.ratingTwo);
         });
 
         btn_rate3.setOnClickListener(v -> {
             et_Colour.setText("#9CC5A1");
+            emotion.getNumber("3");
             entry_layout.setBackgroundResource(R.color.ratingThree);
         });
 
         btn_rate4.setOnClickListener(v -> {
             et_Colour.setText("#88AB75");
+            emotion.getNumber("4");
             entry_layout.setBackgroundResource(R.color.ratingFour);
         });
 
         btn_rate5.setOnClickListener(v -> {
             et_Colour.setText("#49A078");
+            emotion.getNumber("5");
             entry_layout.setBackgroundResource(R.color.ratingFive);
         });
 
