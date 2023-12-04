@@ -12,7 +12,7 @@ import java.util.List;
 public class PastEntries_Activity extends AppCompatActivity {
 
     RecyclerView rv_entries;
-    MyAdapter myAdapter;
+    NoteAdapter noteAdapter;
     List<MyModel> entries_list = new ArrayList<>();
     SQLiteManager sqLiteManager;
 
@@ -32,14 +32,14 @@ public class PastEntries_Activity extends AppCompatActivity {
 //        sqLiteManager = SQLiteManager.instanceOfDatabase(this);
 //        sqLiteManager.getAllEntries();
 //
-//        myAdapter = new MyAdapter(entries_list, getApplicationContext(), sqLiteManager);
-//        rv_entries.setAdapter(myAdapter);
+//        noteAdapter = new NoteAdapter(entries_list, getApplicationContext(), sqLiteManager);
+//        rv_entries.setAdapter(noteAdapter);
         entries_list.clear();
         entries_list.addAll(sqLiteManager.getAllEntries());
         rv_entries.setLayoutManager(new LinearLayoutManager((getApplicationContext())));
 
-        myAdapter = new MyAdapter(entries_list, getApplicationContext(), sqLiteManager);
-        rv_entries.setAdapter(myAdapter);
+        noteAdapter = new NoteAdapter(entries_list, getApplicationContext(), sqLiteManager);
+        rv_entries.setAdapter(noteAdapter);
 
     }
 
