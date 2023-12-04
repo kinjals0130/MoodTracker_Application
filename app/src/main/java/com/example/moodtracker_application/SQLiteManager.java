@@ -197,5 +197,28 @@ public class SQLiteManager extends SQLiteOpenHelper {
 
     }
 
+    public long updateEntryInDatabase(MyModel myModel){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+
+        if (myModel.getId() != null) cv.put(COLUMN_ID, myModel.getId()); //
+        cv.put(COLUMN_EMOTION, myModel.getEmotion());
+        cv.put(COLUMN_TITLE, myModel.getTitle());
+        cv.put(COLUMN_DESCRIPTION, myModel.getDescription());
+        cv.put(COLUMN_DATE, myModel.getDate());
+        cv.put(COLUMN_COLOUR, myModel.getColour());
+        cv.put(COLUMN_PRIVATE, myModel.getPrivate());
+        //not sure how to go about handling adding voice note to the table
+
+        if (myModel.getLongitude() != 0.0) cv.put(COLUMN_LONGITUDE, myModel.getLongitude()); // if they are uninitialized
+        if (myModel.getLatitude() != 0.0) cv.put(COLUMN_LATITUDE, myModel.getLatitude()); //
+
+        long result = db.update(TABLE_NAME, cv, COLUMN_ID + " =?", new String[]{
+                String.valueOf(myModel.getId())
+        });
+
+        db.close();
+        return result;
+    }
 
 }
