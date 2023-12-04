@@ -3,9 +3,12 @@ package com.example.moodtracker_application;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.ActivityCompat;
+import androidx.fragment.app.DialogFragment;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -19,14 +22,22 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import org.w3c.dom.Text;
+
+import java.util.Calendar;
+import java.util.Date;
 
 public class NoteActivity extends AppCompatActivity {
 
-    Button btn_discard, btn_save, btn_rate1, btn_rate2, btn_rate3, btn_rate4, btn_rate5, btn_voiceNote;
+    Button btn_discard, btn_save, btn_rate1, btn_rate2, btn_rate3, btn_rate4, btn_rate5, btn_voiceNote, btn_pickDate;
     EditText et_date, et_description, et_Title, et_Colour;
+    TextView tv_date;
     CheckBox cb_private;
     LinearLayout entry_layout;
 
@@ -37,6 +48,7 @@ public class NoteActivity extends AppCompatActivity {
     LocationManager locationManager;
     double latitude;
     double longitude;
+
 
 
     //TODO: Replace Date Field with Date Picker (see https://developer.android.com/develop/ui/views/components/pickers#DatePicker) for tutorial
@@ -56,7 +68,50 @@ public class NoteActivity extends AppCompatActivity {
         btn_rate4 = findViewById(R.id.btn_four);
         btn_rate5 = findViewById(R.id.btn_five);
 
-        et_date = findViewById(R.id.et_date);
+
+//        et_date = findViewById(R.id.et_date);
+        tv_date = (TextView) findViewById(R.id.DateText);
+        btn_pickDate = (Button) findViewById(R.id.pickDate);
+//        btn_pickDate.setOnClickListener(v ->{
+//            DatePickerFragment newFragment = new DatePickerFragment();
+//            newFragment.show(, "datePicker");
+//        });
+
+        // on below line we are adding click listener for our pick date button
+        btn_pickDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // on below line we are getting
+                // the instance of our calendar.
+                final Calendar c = Calendar.getInstance();
+
+                // on below line we are getting
+                // our day, month and year.
+                int year = c.get(Calendar.YEAR);
+                int month = c.get(Calendar.MONTH);
+                int day = c.get(Calendar.DAY_OF_MONTH);
+
+                // on below line we are creating a variable for date picker dialog.
+                DatePickerDialog datePickerDialog = new DatePickerDialog(
+                        // on below line we are passing context.
+                        NoteActivity.this,
+                        new DatePickerDialog.OnDateSetListener() {
+                            @Override
+                            public void onDateSet(DatePicker view, int year,
+                                                  int monthOfYear, int dayOfMonth) {
+                                // on below line we are setting date to our text view.
+                                tv_date.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
+
+                            }
+                        },
+                        // on below line we are passing year,
+                        // month and day for selected date in our date picker.
+                        year, month, day);
+                // at last we are calling show to
+                // display our date picker dialog.
+                datePickerDialog.show();
+            }
+        });
         et_description = findViewById(R.id.et_noteDescription);
         et_Title = findViewById(R.id.et_Title);
         et_Colour = findViewById(R.id.et_colour);
@@ -134,7 +189,8 @@ public class NoteActivity extends AppCompatActivity {
     public void savePressed(View view) {
         String title = et_Title.getText().toString();
         String desc = et_description.getText().toString();
-        String date = et_date.getText().toString();
+//        String date = et_date.getText().toString();
+        String date = tv_date.getText().toString();
         String colour = et_Colour.getText().toString();
         // TODO: ACTUALLY GET the real value for emotion
         String emotion = "placeholder text";

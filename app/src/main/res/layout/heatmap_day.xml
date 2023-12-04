@@ -20,8 +20,8 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:text="TextView"
-        android:textAlignment="center"
+        android:textAlignment="textEnd"
 
 
-        android:textColor="@color/save_button" />
+        android:textColor="@color/black" />
 </LinearLayout>

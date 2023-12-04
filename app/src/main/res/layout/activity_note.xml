@@ -2,10 +2,10 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/entry_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".NoteActivity"
-    android:id="@+id/entry_layout">
+    tools:context=".NoteActivity">
 
 
     <com.google.android.material.appbar.MaterialToolbar
@@ -26,13 +26,13 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
         android:text="@string/feeling"
-        android:textSize="20sp"
         android:textAlignment="center"
+        android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/horizontalScrollView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/materialToolbar4" />
 
-<!--    TODO: REPLACE WITH THE SAME CODE THAT WAS MODIFIED ON MAIN ACTIVITY-->
+    <!--    TODO: REPLACE WITH THE SAME CODE THAT WAS MODIFIED ON MAIN ACTIVITY-->
     <HorizontalScrollView
         android:id="@+id/horizontalScrollView"
         android:layout_width="match_parent"
@@ -67,7 +67,7 @@
                 android:layout_margin="10dp"
                 android:layout_weight="1"
                 android:background="@drawable/level2frog"
-                android:foreground="@drawable/level2frog"/>
+                android:foreground="@drawable/level2frog" />
 
             <Button
                 android:id="@+id/btn_three"
@@ -76,7 +76,7 @@
                 android:layout_margin="10dp"
                 android:layout_weight="1"
                 android:background="@drawable/level3frog"
-                android:foreground="@drawable/level3frog"/>
+                android:foreground="@drawable/level3frog" />
 
             <Button
                 android:id="@+id/btn_four"
@@ -85,8 +85,7 @@
                 android:layout_margin="10dp"
                 android:layout_weight="1"
                 android:background="@drawable/level4frog"
-                android:foreground="@drawable/level4frog"
-                />
+                android:foreground="@drawable/level4frog" />
 
             <Button
                 android:id="@+id/btn_five"
@@ -95,7 +94,7 @@
                 android:layout_margin="10dp"
                 android:layout_weight="1"
                 android:background="@drawable/level5frog"
-                android:foreground="@drawable/level5frog"/>
+                android:foreground="@drawable/level5frog" />
 
         </LinearLayout>
     </HorizontalScrollView>
@@ -119,8 +118,19 @@
             android:layout_marginTop="10dp"
             android:text="@string/priv" />
 
-        <EditText
-            android:id="@+id/et_date"
+        <!--        <EditText-->
+        <!--            android:id="@+id/et_date"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="48dp"-->
+        <!--            android:layout_marginStart="10dp"-->
+        <!--            android:layout_marginTop="10dp"-->
+        <!--            android:ems="10"-->
+        <!--            android:hint="@string/date"-->
+        <!--            android:inputType="date"-->
+        <!--            android:textColor="@color/black"-->
+        <!--            android:textSize="18sp" />-->
+        <Button
+            android:id="@+id/pickDate"
             android:layout_width="wrap_content"
             android:layout_height="48dp"
             android:layout_marginStart="10dp"
@@ -128,8 +138,18 @@
             android:ems="10"
             android:hint="@string/date"
             android:inputType="date"
+            android:text="Pick date"
             android:textColor="@color/black"
             android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/DateText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:textAlignment="center"
+            android:textSize="20sp" />
+
 
         <EditText
             android:id="@+id/et_Title"
@@ -148,66 +168,66 @@
             android:layout_height="48dp"
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
+            android:layout_marginBottom="16dp"
             android:ems="10"
             android:hint="@string/text_description"
             android:inputType="textMultiLine"
-            android:textSize="18sp"
-            android:layout_marginBottom="16dp" />
+            android:textSize="18sp" />
 
 
     </LinearLayout>
-<!--    <EditText-->
-<!--        android:id="@+id/et_date"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="48dp"-->
-<!--        android:layout_marginStart="10dp"-->
-<!--        android:layout_marginTop="50dp"-->
-<!--        android:ems="10"-->
-<!--        android:hint="@string/date"-->
-<!--        android:inputType="date"-->
-<!--        android:textSize="18sp"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView" />-->
+    <!--    <EditText-->
+    <!--        android:id="@+id/et_date"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="48dp"-->
+    <!--        android:layout_marginStart="10dp"-->
+    <!--        android:layout_marginTop="50dp"-->
+    <!--        android:ems="10"-->
+    <!--        android:hint="@string/date"-->
+    <!--        android:inputType="date"-->
+    <!--        android:textSize="18sp"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView" />-->
 
-<!--    <CheckBox-->
-<!--        android:id="@+id/cb_privateEntry"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginTop="50dp"-->
-<!--        android:layout_marginEnd="10dp"-->
-<!--        android:text="@string/priv"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toEndOf="@+id/et_date"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView" />-->
+    <!--    <CheckBox-->
+    <!--        android:id="@+id/cb_privateEntry"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_marginTop="50dp"-->
+    <!--        android:layout_marginEnd="10dp"-->
+    <!--        android:text="@string/priv"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintStart_toEndOf="@+id/et_date"-->
+    <!--        app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView" />-->
 
-<!--    <EditText-->
-<!--        android:id="@+id/et_noteDescription"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="48dp"-->
-<!--        android:layout_marginStart="10dp"-->
-<!--        android:layout_marginTop="36dp"-->
-<!--        android:layout_marginEnd="10dp"-->
-<!--        android:ems="10"-->
-<!--        android:hint="@string/text_description"-->
-<!--        android:inputType="textMultiLine"-->
-<!--        android:textSize="18sp"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintHorizontal_bias="0.079"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/et_date" />-->
+    <!--    <EditText-->
+    <!--        android:id="@+id/et_noteDescription"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="48dp"-->
+    <!--        android:layout_marginStart="10dp"-->
+    <!--        android:layout_marginTop="36dp"-->
+    <!--        android:layout_marginEnd="10dp"-->
+    <!--        android:ems="10"-->
+    <!--        android:hint="@string/text_description"-->
+    <!--        android:inputType="textMultiLine"-->
+    <!--        android:textSize="18sp"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintHorizontal_bias="0.079"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toBottomOf="@+id/et_date" />-->
 
-<!--    <EditText-->
-<!--        android:id="@+id/et_Title"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="48dp"-->
-<!--        android:layout_marginStart="10dp"-->
-<!--        android:layout_marginTop="100dp"-->
-<!--        android:ems="10"-->
-<!--        android:hint="@string/title_of_note"-->
-<!--        android:inputType="text"-->
-<!--        android:textSize="18sp"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/et_noteDescription" />-->
+    <!--    <EditText-->
+    <!--        android:id="@+id/et_Title"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="48dp"-->
+    <!--        android:layout_marginStart="10dp"-->
+    <!--        android:layout_marginTop="100dp"-->
+    <!--        android:ems="10"-->
+    <!--        android:hint="@string/title_of_note"-->
+    <!--        android:inputType="text"-->
+    <!--        android:textSize="18sp"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toBottomOf="@+id/et_noteDescription" />-->
 
     <Button
         android:id="@+id/btn_voiceNote"
