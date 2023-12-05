@@ -214,12 +214,12 @@ public class NoteActivity extends AppCompatActivity {
         String colour = et_Colour.getText().toString();
         String emotion = emotionText.getText().toString();
 //       TODO: actually prevent saves without emotions
-        if (emotion.isEmpty()) Toast.makeText(this, "You must set an emotion!", Toast.LENGTH_SHORT).show();
         int priv = (cb_private.isChecked()) ? 1 : 0;
 
 
-        // TODO: if any invalid flag is raised then surround that field with a Red Outline
-        if (date.isEmpty()) Toast.makeText(this, "Please enter a date", Toast.LENGTH_SHORT).show();
+        if (emotion.isEmpty()) Toast.makeText(this, "You must set an emotion!", Toast.LENGTH_SHORT).show();
+       else  if (date.isEmpty()) Toast.makeText(this, "Please enter a date", Toast.LENGTH_SHORT).show();
+
 
         else {
             MyModel myModel = new MyModel(date, emotion, title, desc, colour, priv,longitude,latitude);

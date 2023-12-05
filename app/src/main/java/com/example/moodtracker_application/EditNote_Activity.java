@@ -86,11 +86,14 @@ public class EditNote_Activity extends AppCompatActivity {
         String id = getIntent().getStringExtra("dbID");
         myModel = sqLiteManager.getEntryByID(id);//new MyModel();
         if (myModel.getId() != null) {
+            cb_private.setActivated(myModel.getPrivate() == 1);
             et_title.setText(myModel.getTitle());
             et_description.setText(myModel.getDescription());
             tv_date.setText(myModel.getDate());
+
             et_colour.setText(myModel.getColour());
             currentEmotion = myModel.getEmotion();
+
             entry_layout.setBackgroundColor(Color.parseColor(et_colour.getText().toString()));
         }
 

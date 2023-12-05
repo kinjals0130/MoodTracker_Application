@@ -43,7 +43,7 @@ public class MyModel implements Serializable {
     }
 
     //quick note entry
-    public MyModel(String id, String date, String emotion, String colour) {
+    public MyModel(String date, String emotion, String colour) {
         this.id = id;
         this.date = date;
         this.emotion = emotion;

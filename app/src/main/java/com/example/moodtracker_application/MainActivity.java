@@ -22,6 +22,9 @@ import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.time.LocalDateTime;
+import java.util.Calendar;
+
 public class MainActivity extends AppCompatActivity {
 
     Button btn_newEntry, btn_rate1, btn_rate2, btn_rate3, btn_rate4, btn_rate5, btn_Menu;
@@ -70,16 +73,50 @@ public class MainActivity extends AppCompatActivity {
 
 //        TODO: REplace with DB.insert calls to the respective emotion
         TextView tv_moodMessage = findViewById(R.id.tv_moodMessage);
+        Calendar cal = Calendar.getInstance();
+        int year = cal.get(Calendar.YEAR);
+        int month = cal.get(Calendar.MONTH);
+        int day = cal.get(Calendar.DAY_OF_MONTH);
 
-        btn_rate1.setOnClickListener(v -> tv_moodMessage.setText(getString(R.string.sad_message)));
+        btn_rate1.setOnClickListener(v -> {
+            database.addNewEntry(new MyModel(day + "-" + (month + 1) + "-" + year, "very sad", "#ED6A5A"));
+            Dataset = database.getAllEntries().toArray(new MyModel[0]);
+            Log.d("MainActivity log", "got new Data length: " + Dataset.length);
+            heatmapAdapter.Dataset = Dataset;
+            heatmapAdapter.notifyDataSetChanged();
+        }/*tv_moodMessage.setText(getString(R.string.sad_message))*/);
 
-        btn_rate2.setOnClickListener(v -> tv_moodMessage.setText(getString(R.string.not_good_message)));
+        btn_rate2.setOnClickListener(v -> {
+            database.addNewEntry(new MyModel(day + "-" + (month + 1) + "-" + year, "sad", "#FCB97D"));
+            Dataset = database.getAllEntries().toArray(new MyModel[0]);
+            Log.d("MainActivity log", "got new Data length: " + Dataset.length);
+            heatmapAdapter.Dataset = Dataset;
+            heatmapAdapter.notifyDataSetChanged();
+        }/*tv_moodMessage.setText(getString(R.string.not_good_message))*/);
 
-        btn_rate3.setOnClickListener(v -> tv_moodMessage.setText(getString(R.string.okay_message)));
+        btn_rate3.setOnClickListener(v -> {
+            database.addNewEntry(new MyModel(day + "-" + (month + 1) + "-" + year, "neutral", "#9CC5A1"));
+            Dataset = database.getAllEntries().toArray(new MyModel[0]);
+            Log.d("MainActivity log", "got new Data length: " + Dataset.length);
+            heatmapAdapter.Dataset = Dataset;
+            heatmapAdapter.notifyDataSetChanged();
+        } /*tv_moodMessage.setText(getString(R.string.okay_message))*/);
 
-        btn_rate4.setOnClickListener(v -> tv_moodMessage.setText(getString(R.string.good_message)));
+        btn_rate4.setOnClickListener(v -> {
+            database.addNewEntry(new MyModel(day + "-" + (month + 1) + "-" + year, "happy", "#88AB75"));
+            Dataset = database.getAllEntries().toArray(new MyModel[0]);
+            Log.d("MainActivity log", "got new Data length: " + Dataset.length);
+            heatmapAdapter.Dataset = Dataset;
+            heatmapAdapter.notifyDataSetChanged();
+        } /*tv_moodMessage.setText(getString(R.string.good_message))*/);
 
-        btn_rate5.setOnClickListener(v -> tv_moodMessage.setText(getString(R.string.happy_message)));
+        btn_rate5.setOnClickListener(v -> {
+            database.addNewEntry(new MyModel(day + "-" + (month + 1) + "-" + year, "very happy", "#49A078"));
+            Dataset = database.getAllEntries().toArray(new MyModel[0]);
+            Log.d("MainActivity log", "got new Data length: " + Dataset.length);
+            heatmapAdapter.Dataset = Dataset;
+            heatmapAdapter.notifyDataSetChanged();
+        }/*tv_moodMessage.setText(getString(R.string.happy_message))*/);
 
 
         btn_Menu.setOnClickListener(new View.OnClickListener() {
@@ -144,12 +181,12 @@ public class MainActivity extends AppCompatActivity {
             Log.d("MainActivity Log", "Binding position: " + position);
             holder.diaryDay.setText(Dataset[holder.getAdapterPosition()].date);
 
-            Drawable drawable  = AppCompatResources.getDrawable(context, R.drawable.shape);
+            Drawable drawable = AppCompatResources.getDrawable(context, R.drawable.shape);
 //            GradientDrawable backgroundDrawable =(GradientDrawable) holder.background;
             Drawable unwrappedDrawable = AppCompatResources.getDrawable(context, R.drawable.shape);
             Drawable wrappedDrawable = DrawableCompat.wrap(unwrappedDrawable);
             DrawableCompat.setTint(wrappedDrawable, Color.parseColor(Dataset[holder.getAdapterPosition()].colour));
-            holder.background.setBackground( wrappedDrawable);
+            holder.background.setBackground(wrappedDrawable);
         }
 
         @Override

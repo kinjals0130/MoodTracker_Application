@@ -28,8 +28,9 @@ public class VoiceNoteActivity extends AppCompatActivity implements MediaPlayer.
     private static final int MICROPHONE_PERMISSION_CODE = 200;
     MediaRecorder mediaRecorder;
     MediaPlayer mediaPlayer;
-    TextView tv_userMessage;
-    Button btn_saveVoiceNote;
+    TextView tv_userMessage , tv_recordbtn, tv_stopBtn;
+    Button btn_saveVoiceNote, btn_record, btn_stopRrecord;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +42,18 @@ public class VoiceNoteActivity extends AppCompatActivity implements MediaPlayer.
         }
 
         tv_userMessage = findViewById(R.id.tv_message);
-//        btn_saveVoiceNote = (Button) findViewById(R.id.btn_saveVoiceNote);
+
+
+
+
+
+        btn_record = (Button) findViewById(R.id.btn_record);
+        tv_recordbtn= findViewById(R.id.tv_recordbtn);
+
+        btn_stopRrecord = (Button) findViewById(R.id.btn_stop);
+        tv_stopBtn= findViewById(R.id.tv_stopbtn);
+        btn_stopRrecord.setVisibility(View.INVISIBLE);
+        tv_stopBtn.setVisibility(View.INVISIBLE);
     }
 
     @SuppressLint("SetTextI18n")
@@ -57,6 +69,11 @@ public class VoiceNoteActivity extends AppCompatActivity implements MediaPlayer.
             mediaRecorder.start();
 
             tv_userMessage.setText("Audio is now recording.");
+            btn_stopRrecord.setVisibility(View.VISIBLE);
+            tv_stopBtn.setVisibility(View.VISIBLE);
+
+            btn_record.setVisibility(View.INVISIBLE);
+            tv_recordbtn.setVisibility(View.INVISIBLE);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -70,6 +87,10 @@ public class VoiceNoteActivity extends AppCompatActivity implements MediaPlayer.
         mediaRecorder.release();
         mediaRecorder = null;
         tv_userMessage.setText("Audio has stopped recording.");
+        btn_stopRrecord.setVisibility(View.INVISIBLE);
+        tv_stopBtn.setVisibility(View.INVISIBLE);
+        btn_record.setVisibility(View.VISIBLE);
+        tv_recordbtn.setVisibility(View.VISIBLE);
 
     }
 
