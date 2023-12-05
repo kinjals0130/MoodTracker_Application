@@ -84,6 +84,7 @@ public class SQLiteManager extends SQLiteOpenHelper {
         cv.put(COLUMN_DATE, myModel.getDate());
         cv.put(COLUMN_COLOUR, myModel.getColour());
         cv.put(COLUMN_PRIVATE, myModel.getPrivate());
+        cv.put(COLUMN_VOICE, myModel.getAudio());
         //not sure how to go about handling adding voice note to the table
 
         if (myModel.getLongitude() != 0.0) cv.put(COLUMN_LONGITUDE, myModel.getLongitude()); // if they are uninitialized
@@ -93,6 +94,7 @@ public class SQLiteManager extends SQLiteOpenHelper {
         db.close();
         return result;
     }
+
     public int deletePrivateEntries() {
         SQLiteDatabase db = this.getWritableDatabase();
         int rowsAffected = db.delete(TABLE_NAME, COLUMN_PRIVATE + " = ?", new String[]{"1"});
@@ -138,6 +140,7 @@ public class SQLiteManager extends SQLiteOpenHelper {
         db.close();
         return pin;
     }
+
     // TODO RETURN VOICE NOTE
     public List<MyModel> getAllEntries() {
         List<MyModel> myModelList = new ArrayList<>();
@@ -167,12 +170,13 @@ public class SQLiteManager extends SQLiteOpenHelper {
         return myModelList;
 
     }
+
     public MyModel getEntryByID(String id) {
 //        List<MyModel> myModelList = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
 
         String queryString = "SELECT * FROM " + TABLE_NAME;
-        Cursor cursor = db.query(TABLE_NAME,null," "+ COLUMN_ID+ " = ?", new String[]{id},"","","");
+        Cursor cursor = db.query(TABLE_NAME, null, " " + COLUMN_ID + " = ?", new String[]{id}, "", "", "");
 //        Cursor cursor = db.rawQuery(queryString, null);
 
         MyModel myModel = new MyModel();
@@ -184,7 +188,7 @@ public class SQLiteManager extends SQLiteOpenHelper {
                 myModel.setDescription(cursor.getString(3));
                 myModel.setDate(cursor.getString(4));
                 myModel.setPrivate(cursor.getInt(5));
-                //idk how to go about handling the voice note but that will be colIndex 6
+                myModel.setAudio(cursor.getBlob(6));
                 myModel.setColour(cursor.getString(7));
                 myModel.setLongitude(cursor.getDouble(8));
                 myModel.setLatitude(cursor.getDouble(9));
@@ -197,7 +201,7 @@ public class SQLiteManager extends SQLiteOpenHelper {
 
     }
 
-    public long updateEntryInDatabase(MyModel myModel){
+    public long updateEntryInDatabase(MyModel myModel) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
 
@@ -213,9 +217,7 @@ public class SQLiteManager extends SQLiteOpenHelper {
         if (myModel.getLongitude() != 0.0) cv.put(COLUMN_LONGITUDE, myModel.getLongitude()); // if they are uninitialized
         if (myModel.getLatitude() != 0.0) cv.put(COLUMN_LATITUDE, myModel.getLatitude()); //
 
-        long result = db.update(TABLE_NAME, cv, COLUMN_ID + " =?", new String[]{
-                String.valueOf(myModel.getId())
-        });
+        long result = db.update(TABLE_NAME, cv, COLUMN_ID + " =?", new String[]{String.valueOf(myModel.getId())});
 
         db.close();
         return result;

@@ -10,6 +10,7 @@ import android.app.Activity;
 import android.content.ContextWrapper;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.MediaRecorder;
 import android.os.Bundle;
@@ -20,8 +21,9 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import java.io.File;
+import java.io.FileDescriptor;
 
-public class VoiceNoteActivity extends AppCompatActivity {
+public class VoiceNoteActivity extends AppCompatActivity implements MediaPlayer.OnPreparedListener, MediaPlayer.OnErrorListener  {
 
     private static final int MICROPHONE_PERMISSION_CODE = 200;
     MediaRecorder mediaRecorder;
@@ -75,7 +77,12 @@ public class VoiceNoteActivity extends AppCompatActivity {
 
         try {
             mediaPlayer = new MediaPlayer();
+//            mediaPlayer.reset();
+//            mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+//            FileDescriptor fd = file.get
+//            File file =new File(getRecordingFilePath());
             mediaPlayer.setDataSource(getRecordingFilePath());
+            Log.d("Voice Playback", getRecordingFilePath());
             mediaPlayer.prepare();
             mediaPlayer.start();
             tv_userMessage.setText("Recording is now playing.");
@@ -83,6 +90,8 @@ public class VoiceNoteActivity extends AppCompatActivity {
             e.printStackTrace();
         }
     }
+
+
 
     private boolean checkMicrophonePresent() {
         return this.getPackageManager().hasSystemFeature(PackageManager.FEATURE_MICROPHONE);
@@ -105,6 +114,12 @@ public class VoiceNoteActivity extends AppCompatActivity {
 
     public void discardVoiceNote(View view) {
 //        Intent backPage = new Intent(VoiceNoteActivity.this, NoteActivity.class);
+        Intent returnIntent = new Intent();
+//        File file = new File(getApplicationContext().getFilesDir(), "recordingTestFile" + ".mp3");
+//        Log.d("returning", String.valueOf(file.toURI()));
+        returnIntent.putExtra("filePath", "");
+//        returnIntent.setData(file.toUri());
+        setResult(Activity.RESULT_OK,returnIntent);
         finish();
 
     }
@@ -120,4 +135,20 @@ public class VoiceNoteActivity extends AppCompatActivity {
 
 
     }
+
+    @Override
+    public boolean onError(MediaPlayer mp, int what, int extra) {
+        return false;
+    }
+
+    @Override
+    public void onPointerCaptureChanged(boolean hasCapture) {
+        super.onPointerCaptureChanged(hasCapture);
+    }
+
+    @Override
+    public void onPrepared(MediaPlayer player) {
+        mediaPlayer.start();
+    }
+
 }

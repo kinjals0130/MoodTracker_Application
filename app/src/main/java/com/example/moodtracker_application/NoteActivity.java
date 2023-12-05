@@ -19,6 +19,7 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.FileUtils;
 import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
@@ -32,9 +33,14 @@ import android.widget.Toast;
 
 import org.w3c.dom.Text;
 
+import java.io.BufferedInputStream;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.OutputStream;
 import java.net.URI;
+import java.nio.file.Files;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Objects;
@@ -51,6 +57,7 @@ public class NoteActivity extends AppCompatActivity {
 
     EmotionSwitch emotion = new EmotionSwitch();
     int LOCATION_RESQUEST_CODE = 20;
+    int RECORD_VOICE_VOTE =56;
     Location currentLocation = null;
     LocationManager locationManager;
     double latitude;
@@ -59,7 +66,7 @@ public class NoteActivity extends AppCompatActivity {
 
     String currentEmotion = null;
 
-int RECORD_VOICE_VOTE =56;
+
     File voiceRecoding;
 
       @SuppressLint("SetTextI18n")
@@ -164,7 +171,7 @@ int RECORD_VOICE_VOTE =56;
             entry_layout.setBackgroundResource(R.color.ratingFive);
         });
 
-        // get location perermissions
+        // get location permissions
         boolean permsGranted = isLocationPermissionGranted();
 //        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         LocationManager locManager;
@@ -205,8 +212,8 @@ int RECORD_VOICE_VOTE =56;
 //        String date = et_date.getText().toString();
         String date = tv_date.getText().toString();
         String colour = et_Colour.getText().toString();
-        // TODO: ACTUALLY GET the real value for emotion
         String emotion = emotionText.getText().toString();
+//       TODO: actually prevent saves without emotions
         if (emotion.isEmpty()) Toast.makeText(this, "You must set an emotion!", Toast.LENGTH_SHORT).show();
         int priv = (cb_private.isChecked()) ? 1 : 0;
 
@@ -217,6 +224,23 @@ int RECORD_VOICE_VOTE =56;
         else {
             MyModel myModel = new MyModel(date, emotion, title, desc, colour, priv,longitude,latitude);
             if(voiceRecoding.exists() && voiceRecoding.canRead()){
+                int size = (int) voiceRecoding.length();
+                Log.d("voiceRecoding.length()", String.valueOf(voiceRecoding.length()));
+                byte[] voiceBytes = new byte[size];
+                try {
+                    BufferedInputStream buf = new BufferedInputStream(new FileInputStream(voiceRecoding));
+                    buf.read(voiceBytes, 0, voiceBytes.length);
+                    Log.d("voiceBytes.Length", String.valueOf(voiceBytes.length));
+                    buf.close();
+                    myModel.setAudio(voiceBytes);
+                } catch (FileNotFoundException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+
 
             }
 
@@ -251,7 +275,11 @@ int RECORD_VOICE_VOTE =56;
             // Obtain new dataset from database and update the heatmap adapter
 
             Log.d("NoteActivity log", "got new voice file path: " + data.getStringExtra("filePath"));
-            voiceRecoding = new File(Objects.requireNonNull(data.getStringExtra("filePath")));
+                File temp = new File(Objects.requireNonNull(data.getStringExtra("filePath")));
+            if (temp.exists() && temp.canRead()){
+
+                voiceRecoding = temp;
+            }
         }
     }
     private Boolean isLocationPermissionGranted() {

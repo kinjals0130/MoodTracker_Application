@@ -16,7 +16,6 @@ import android.widget.TextView;
 
 import java.util.List;
 
-//TODO: Refactor this class to have a more descriptive name as we have multiple recycler views and adaptor classes in this project
 public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> {
 
     private final List<MyModel> entriesList;

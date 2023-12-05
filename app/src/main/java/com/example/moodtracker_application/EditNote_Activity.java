@@ -1,5 +1,7 @@
 package com.example.moodtracker_application;
 
+import static java.sql.DriverManager.println;
+
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -18,6 +20,15 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.Objects;
+
 public class EditNote_Activity extends AppCompatActivity {
 
     EditText et_title, et_description, et_colour;
@@ -32,9 +43,9 @@ public class EditNote_Activity extends AppCompatActivity {
     SQLiteManager sqLiteManager;
     MyModel myModel;
     String currentEmotion = null;
+    int RECORD_VOICE_VOTE = 56;
 
-
-    Uri voiceRecoding;
+    File voiceRecoding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +54,7 @@ public class EditNote_Activity extends AppCompatActivity {
 
         et_title = findViewById(R.id.et_Title);
         et_description = findViewById(R.id.et_noteDescription);
-        et_colour  = findViewById(R.id.et_colour);
+        et_colour = findViewById(R.id.et_colour);
         tv_date = findViewById(R.id.DateText);
         cb_private = findViewById(R.id.cb_privateEntry);
 
@@ -60,8 +71,8 @@ public class EditNote_Activity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(EditNote_Activity.this, MapsMarkerActivity.class);
-                intent.putExtra("Longitude",myModel.getLongitude());
-                intent.putExtra("Latitude",myModel.getLatitude());
+                intent.putExtra("Longitude", myModel.getLongitude());
+                intent.putExtra("Latitude", myModel.getLatitude());
                 startActivity(intent);
             }
         });
@@ -74,7 +85,7 @@ public class EditNote_Activity extends AppCompatActivity {
 
         String id = getIntent().getStringExtra("dbID");
         myModel = sqLiteManager.getEntryByID(id);//new MyModel();
-        if(myModel.getId() != null){
+        if (myModel.getId() != null) {
             et_title.setText(myModel.getTitle());
             et_description.setText(myModel.getDescription());
             tv_date.setText(myModel.getDate());
@@ -82,6 +93,10 @@ public class EditNote_Activity extends AppCompatActivity {
             currentEmotion = myModel.getEmotion();
             entry_layout.setBackgroundColor(Color.parseColor(et_colour.getText().toString()));
         }
+
+        // writing voice bytes to file to prep for voice activity
+        saveVoiceBytesToFile();
+
 
         // get all frogs and set OnClicks
         btn_rate1 = findViewById(R.id.btn_one);
@@ -99,19 +114,19 @@ public class EditNote_Activity extends AppCompatActivity {
 
         btn_rate2.setOnClickListener(v -> {
             et_colour.setText("#FCB97D");
-            emotionText.setText(  emotion.getEmotion("2"));
+            emotionText.setText(emotion.getEmotion("2"));
             entry_layout.setBackgroundResource(R.color.ratingTwo);
         });
 
         btn_rate3.setOnClickListener(v -> {
             et_colour.setText("#9CC5A1");
-            emotionText.setText( emotion.getEmotion("3"));
+            emotionText.setText(emotion.getEmotion("3"));
             entry_layout.setBackgroundResource(R.color.ratingThree);
         });
 
         btn_rate4.setOnClickListener(v -> {
             et_colour.setText("#88AB75");
-            emotionText.setText( emotion.getEmotion("4"));
+            emotionText.setText(emotion.getEmotion("4"));
             entry_layout.setBackgroundResource(R.color.ratingFour);
         });
 
@@ -121,6 +136,21 @@ public class EditNote_Activity extends AppCompatActivity {
             entry_layout.setBackgroundResource(R.color.ratingFive);
         });
 
+    }
+
+    private void saveVoiceBytesToFile() {
+        try {
+            File voice = new File(getApplicationContext().getFilesDir(), "recordingTestFile.mp3");
+            if (!voice.exists()) {
+                voice.createNewFile();
+            }
+            FileOutputStream fos = new FileOutputStream(voice);
+            fos.write(myModel.getAudio());
+            fos.close();
+        } catch (Exception e) {
+            Log.e("VOICE WRITING", e.getMessage());
+
+        }
     }
 
     //this method is called when discard button is clicked, set in xml file
@@ -136,14 +166,34 @@ public class EditNote_Activity extends AppCompatActivity {
         String desc = et_description.getText().toString();
         String date = tv_date.getText().toString();
         String colour = et_colour.getText().toString();
-        // TODO: ACTUALLY GET the real value for emotion
         String emotion = emotionText.getText().toString();
         int priv = (cb_private.isActivated()) ? 1 : 0;
 
         // TODO: if any invalid flag is raised then surround that field with a Red Outline
         if (date.isEmpty()) Toast.makeText(this, "Please enter a date", Toast.LENGTH_SHORT).show();
         else {
-            MyModel myModel = new MyModel(id, date, emotion, title, desc, colour, priv,this.myModel.longitude,this.myModel.latitude);
+            MyModel myModel = new MyModel(id, date, emotion, title, desc, colour, priv, this.myModel.longitude, this.myModel.latitude);
+            if (voiceRecoding.exists() && voiceRecoding.canRead()) {
+                int size = (int) voiceRecoding.length();
+                Log.d("voiceRecoding.length()", String.valueOf(voiceRecoding.length()));
+                byte[] voiceBytes = new byte[size];
+                try {
+                    BufferedInputStream buf = new BufferedInputStream(new FileInputStream(voiceRecoding));
+                    buf.read(voiceBytes, 0, voiceBytes.length);
+                    Log.d("voiceBytes.Length", String.valueOf(voiceBytes.length));
+                    buf.close();
+                    myModel.setAudio(voiceBytes);
+                } catch (FileNotFoundException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+
+
+            }
+
 
             long result = sqLiteManager.updateEntryInDatabase(myModel);
             if (result == -1) {
@@ -161,17 +211,24 @@ public class EditNote_Activity extends AppCompatActivity {
         Intent voiceNoteIntent = new Intent(EditNote_Activity.this, VoiceNoteActivity.class);
         startActivityForResult(voiceNoteIntent, 56);
     }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 56) {
+        if (requestCode == RECORD_VOICE_VOTE) {
             // Obtain new dataset from database and update the heatmap adapter
 
-            Log.d("NOTE Activity log", "got new voice file uri: " + data.getData().toString());
-            voiceRecoding = data.getData();
+            Log.d("NoteActivity log", "got new voice file path: " + data.getStringExtra("filePath"));
+            File temp = new File(Objects.requireNonNull(data.getStringExtra("filePath")));
+            if (temp.exists() && temp.canRead()) {
+
+                voiceRecoding = temp;
+            }else{
+                //if were not given the new voice, re-set the old voice recording
+                saveVoiceBytesToFile();
+            }
         }
+
+
     }
-
-
-
 }
