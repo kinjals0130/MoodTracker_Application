@@ -190,12 +190,12 @@
         android:id="@+id/btn_viewMap"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
         android:layout_marginEnd="8dp"
         android:backgroundTint="@color/voiceNote"
         android:text="View Map"
         android:textSize="16sp"
         app:cornerRadius="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/btn_saveNote"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout_noteDetails" />
 
