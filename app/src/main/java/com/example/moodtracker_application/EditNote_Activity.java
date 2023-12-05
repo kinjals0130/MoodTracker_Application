@@ -45,7 +45,7 @@ public class EditNote_Activity extends AppCompatActivity {
     String currentEmotion = null;
     int RECORD_VOICE_VOTE = 56;
 
-    File voiceRecoding;
+    File voiceRecoding = new File("");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

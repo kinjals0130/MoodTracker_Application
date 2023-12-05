@@ -67,7 +67,7 @@ public class NoteActivity extends AppCompatActivity {
     String currentEmotion = null;
 
 
-    File voiceRecoding;
+    File voiceRecoding = new File("");
 
       @SuppressLint("SetTextI18n")
     @Override
